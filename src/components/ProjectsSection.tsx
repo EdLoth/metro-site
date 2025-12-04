@@ -13,7 +13,13 @@ const ProjectsSection = () => {
   return (
     <section id="projetos" className="py-20 bg-background">
       <div className="container mx-auto px-4" ref={ref}>
-        <div className={`text-center mb-16 ${isVisible ? "animate-fade-in-up" : "opacity-0"}`}>
+
+        {/* Header */}
+        <div
+          className={`text-center mb-16 ${
+            isVisible ? "animate-fade-in-up" : "opacity-0"
+          }`}
+        >
           <h2 className="text-4xl md:text-5xl font-bold mb-4 text-foreground">
             {t("projects.title")}
           </h2>
@@ -22,13 +28,10 @@ const ProjectsSection = () => {
           </p>
         </div>
 
+        {/* Projects Grid */}
         <div className="grid md:grid-cols-3 gap-8">
           {projectsData.slice(0, 3).map((project, index) => (
-            <Link
-              key={index}
-              to={`/projeto/${project.id}`}
-              className="block"
-            >
+            <Link key={index} to={`/projeto/${project.id}`} className="block">
               <Card
                 className={`overflow-hidden hover:shadow-2xl transition-all duration-700 hover:-translate-y-4 border-border bg-card group ${
                   isVisible ? "animate-scale-in" : "opacity-0"
@@ -36,17 +39,29 @@ const ProjectsSection = () => {
                 style={{ animationDelay: `${index * 0.2}s` }}
               >
                 <div className="relative h-64 overflow-hidden">
-                  <img
-                    src={project.image}
-                    alt={project.title}
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+
+                  {/* 🎥 VIDEO ESTÁTICO SEMPRE ATIVO */}
+                  <video
+                    src="/hero.mp4"
+                    muted
+                    autoPlay
+                    loop
+                    playsInline
+                    preload="auto"
+                    className="absolute inset-0 w-full h-full object-cover transition-all duration-500 opacity-80 group-hover:opacity-100"
+                    onError={(e) => {
+                      e.currentTarget.style.display = "none";
+                    }}
                   />
-                  <div className="absolute top-4 left-4">
+
+                  {/* Badge */}
+                  <div className="absolute top-4 left-4 z-10">
                     <span className="bg-primary text-primary-foreground px-4 py-1.5 rounded-full text-sm font-semibold shadow-lg">
                       {project.category}
                     </span>
                   </div>
                 </div>
+
                 <CardContent className="p-6">
                   <h3 className="text-xl font-semibold mb-2 text-card-foreground group-hover:text-primary transition-colors">
                     {project.title}
@@ -58,10 +73,15 @@ const ProjectsSection = () => {
           ))}
         </div>
 
-        {/* View All Projects Button */}
-        <div className={`text-center mt-12 ${isVisible ? "animate-fade-in-up" : "opacity-0"}`} style={{ animationDelay: "0.6s" }}>
+        {/* View All */}
+        <div
+          className={`text-center mt-12 ${
+            isVisible ? "animate-fade-in-up" : "opacity-0"
+          }`}
+          style={{ animationDelay: "0.6s" }}
+        >
           <Link to="/projetos">
-            <Button 
+            <Button
               size="lg"
               className="bg-primary hover:bg-primary-dark text-lg px-10 py-6 rounded-full shadow-elegant transition-all duration-500 hover:scale-105"
             >

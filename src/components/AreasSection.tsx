@@ -53,7 +53,7 @@ const AreasSection = () => {
             {t("areas.title")}
           </h2>
 
-          <p className="text-xl text-primary-foreground/80 max-w-3xl mx-auto">
+          <p className="text-xl text-primary-foreground/80 max-w-4xl mx-auto">
             {t("areas.subtitle")}
           </p>
         </div>
