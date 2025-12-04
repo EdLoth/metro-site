@@ -56,7 +56,6 @@ export default function FullProjectSections() {
             transition: { duration: 0.5 },
           }}
         >
-          {/* IMAGEM + VÍDEO */}
           <div className="absolute inset-0">
             <div className="relative w-full h-full">
 
@@ -66,35 +65,31 @@ export default function FullProjectSections() {
                 className="
                   w-full h-full object-cover
                   opacity-70
-                  transition-opacity duration-500
+                  transition-opacity duration-300
                   group-hover:opacity-0
                 "
               />
 
-              {/* VÍDEO - pré-carregado e rodando sempre */}
+              {/* VÍDEO — AGORA FUNCIONANDO */}
               <video
                 src="/hero.mp4"
                 className="
                   absolute inset-0 w-full h-full object-cover
                   opacity-0
+                  transition-opacity duration-300
                   group-hover:opacity-100
-                  transition-opacity duration-500
                 "
                 autoPlay
                 muted
                 loop
                 playsInline
                 preload="auto"
-                onLoadedData={(e) => (e.currentTarget.style.opacity = "0")} // mantém escondido até o hover
-                onError={(e) => (e.currentTarget.style.display = "none")}
               />
             </div>
           </div>
 
-          {/* Overlay escuro */}
           <div className="absolute inset-0 bg-black/40" />
 
-          {/* Conteúdo */}
           <motion.div
             className="relative z-10 flex flex-col items-center text-center max-w-lg"
             variants={contentVariants}
@@ -129,7 +124,6 @@ export default function FullProjectSections() {
             transition: { duration: 0.5 },
           }}
         >
-          {/* IMAGEM + VÍDEO */}
           <div className="absolute inset-0">
             <div className="relative w-full h-full">
 
@@ -138,7 +132,7 @@ export default function FullProjectSections() {
                 className="
                   w-full h-full object-cover
                   opacity-70
-                  transition-opacity duration-500
+                  transition-opacity duration-300
                   group-hover:opacity-0
                 "
               />
@@ -148,21 +142,18 @@ export default function FullProjectSections() {
                 className="
                   absolute inset-0 w-full h-full object-cover
                   opacity-0
+                  transition-opacity duration-300
                   group-hover:opacity-100
-                  transition-opacity duration-500
                 "
                 autoPlay
                 muted
                 loop
                 playsInline
                 preload="auto"
-                onLoadedData={(e) => (e.currentTarget.style.opacity = "0")}
-                onError={(e) => (e.currentTarget.style.display = "none")}
               />
             </div>
           </div>
 
-          {/* Overlay */}
           <div className="absolute inset-0 bg-black/35" />
 
           <motion.div
