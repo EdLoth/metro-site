@@ -33,6 +33,7 @@ export default function FullProjectSections() {
       viewport={{ once: true }}
     >
       <div className="flex w-full h-full relative">
+
         {/* LEFT */}
         <motion.div
           layout
@@ -43,8 +44,7 @@ export default function FullProjectSections() {
             bg-gradient-to-br from-[#0a0a0a] to-[#1b1b1b]
             flex items-center justify-center
             overflow-hidden
-            px-10
-            cursor-pointer
+            px-10 cursor-pointer
           "
           variants={sideVariants}
           initial="hidden"
@@ -59,7 +59,8 @@ export default function FullProjectSections() {
           {/* IMAGEM + VÍDEO */}
           <div className="absolute inset-0">
             <div className="relative w-full h-full">
-              {/* Imagem padrão */}
+
+              {/* Imagem */}
               <img
                 src="/ICOM.jpeg"
                 className="
@@ -70,9 +71,9 @@ export default function FullProjectSections() {
                 "
               />
 
-              {/* Vídeo no hover */}
+              {/* VÍDEO - pré-carregado e rodando sempre */}
               <video
-                src="/hero.mp4" // coloque seu vídeo aqui
+                src="/hero.mp4"
                 className="
                   absolute inset-0 w-full h-full object-cover
                   opacity-0
@@ -82,20 +83,21 @@ export default function FullProjectSections() {
                 autoPlay
                 muted
                 loop
+                playsInline
+                preload="auto"
+                onLoadedData={(e) => (e.currentTarget.style.opacity = "0")} // mantém escondido até o hover
+                onError={(e) => (e.currentTarget.style.display = "none")}
               />
             </div>
           </div>
 
-          {/* Overlay escuro por cima do vídeo/imagem */}
+          {/* Overlay escuro */}
           <div className="absolute inset-0 bg-black/40" />
 
-          {/* Conteúdo textual */}
+          {/* Conteúdo */}
           <motion.div
             className="relative z-10 flex flex-col items-center text-center max-w-lg"
             variants={contentVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
           >
             <Hospital className="h-12 w-12 text-white mb-4" />
             <h3 className="text-3xl md:text-4xl text-white font-bold">
@@ -115,8 +117,7 @@ export default function FullProjectSections() {
             bg-gradient-to-br from-primary to-primary/70
             flex items-center justify-center
             overflow-hidden
-            px-10
-            cursor-pointer
+            px-10 cursor-pointer
           "
           variants={sideVariants}
           initial="hidden"
@@ -131,7 +132,7 @@ export default function FullProjectSections() {
           {/* IMAGEM + VÍDEO */}
           <div className="absolute inset-0">
             <div className="relative w-full h-full">
-              {/* Imagem padrão */}
+
               <img
                 src="/vlt.jpg"
                 className="
@@ -142,9 +143,8 @@ export default function FullProjectSections() {
                 "
               />
 
-              {/* Vídeo no hover */}
               <video
-                src="/hero.mp4" // outro vídeo, se quiser
+                src="/hero.mp4"
                 className="
                   absolute inset-0 w-full h-full object-cover
                   opacity-0
@@ -154,6 +154,10 @@ export default function FullProjectSections() {
                 autoPlay
                 muted
                 loop
+                playsInline
+                preload="auto"
+                onLoadedData={(e) => (e.currentTarget.style.opacity = "0")}
+                onError={(e) => (e.currentTarget.style.display = "none")}
               />
             </div>
           </div>
@@ -161,13 +165,9 @@ export default function FullProjectSections() {
           {/* Overlay */}
           <div className="absolute inset-0 bg-black/35" />
 
-          {/* Conteúdo textual */}
           <motion.div
             className="relative z-10 flex flex-col items-center text-center max-w-lg"
             variants={contentVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
           >
             <TrainFront className="h-12 w-12 text-white mb-4" />
             <h3 className="text-3xl md:text-4xl text-white font-bold">
@@ -176,6 +176,7 @@ export default function FullProjectSections() {
             <p className="text-white/80 mt-3">{t("vlt.subtitle")}</p>
           </motion.div>
         </motion.div>
+
       </div>
     </motion.section>
   );
