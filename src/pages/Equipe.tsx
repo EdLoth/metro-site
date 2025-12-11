@@ -2,6 +2,7 @@ import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import { Users, Award, Briefcase, GraduationCap } from "lucide-react";
 import { useIntersectionObserver } from "@/hooks/useIntersectionObserver";
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -19,22 +20,6 @@ const placeholderImages = [
 
 // Lista completa com informações fictícias
 const teamMembers = [
-  // {
-  //   name: "Mauro de Oliveira Prates",
-  //   role: "Diretor Técnico",
-  //   specialization: "Gestão de Projetos",
-  //   experience: "20 anos",
-  //   registration: "CREA 12345/SP",
-  //   image: placeholderImages[0],
-  // },
-  // {
-  //   name: "Anderson Santos Azevedo",
-  //   role: "Diretor Administrativo-Financeiro",
-  //   specialization: "Administração",
-  //   experience: "18 anos",
-  //   registration: "CREA 23456/SP",
-  //   image: placeholderImages[1],
-  // },
   {
     name: "Adriana Francisca de Santana",
     role: "Gerente Administrativo-Financeiro",
@@ -67,6 +52,7 @@ const teamMembers = [
     registration: "CREA 67890/SP",
     image: placeholderImages[0],
   },
+
   {
     name: "Ronnie Burgos Abbehusen",
     role: "Responsável Técnico",
@@ -281,27 +267,31 @@ const teamMembers = [
 
 const organizationLevels = [
   {
-    level: "Diretoria",
-    positions: [
-      "Sócio-Diretor - Mauro de Oliveira Prates",
-      "Diretor Administrativo-Financeiro - Anderson Santos Azevedo"
-    ],
+    level: "Proprietário",
+    positions: ["Proprietário - Mauro de Oliveira Prates"],
     color: "bg-primary",
   },
   {
-    level: "Responsáveis Técnicos",
+    level: "Diretoria",
     positions: [
-      "Eng. Civil – Adenilson Araujo Oliveira",
-      "Eng. Civil – Humberto Soares da Rocha Neto",
-      "Eng. Civil – Jamerson Mesquita Silva",
-      "Eng. Civil – Ronnie Burgos Abbehusen",
+      "Diretor Técnico - Mauro de Oliveira Prates",
+      "Diretor Administrativo-Financeiro - Anderson Santos Azevedo",
     ],
     color: "bg-secondary",
   },
   {
+    level: "Responsáveis Técnicos",
+    positions: [
+      "Eng. Civil – Mauro de Oliveira Prates",
+      "Eng. Civil – Humberto Soares da Rocha Neto",
+      "Eng. Civil – Jamerson Mesquita Silva",
+      "Eng. Civil – Ronnie Burgos Abbehusen",
+    ],
+    color: "bg-accent",
+  },
+  {
     level: "Quadro Técnico",
     positions: [
-      "Eng. Elet. – Ailton de Sousa Gonçalves",
       "Eng. Civil – Alissandro Santana dos Santos",
       "Eng. Mec. – Delane de Oliveira Prates",
       "Eng. Civil – Diego Gonzalez de Oliveira",
@@ -314,7 +304,6 @@ const organizationLevels = [
       "Eng. Civil – Judson Morais Magalhães",
       "Eng. Civil – Jurandir Gomes Rocha Júnior",
       "Eng. Civil – Kayan Mascarenhas Silva",
-      "Engª. Civil – Laise Alves Siqueira",
       "Eng. Civil – Lucas Lôbo Fernandes",
       "Eng. Civil – Marco André Guedes Epstein",
       "Eng. Civil – Mauricio Oliveira Prates",
@@ -338,10 +327,12 @@ const Equipe = () => {
   const { ref: orgRef, isVisible: orgVisible } = useIntersectionObserver({
     threshold: 0.1,
   });
-  const { t } = useLanguage();
 
-  // Fade-up inicial para os cards (sem scroll)
+  const { t } = useLanguage();
   const [animate, setAnimate] = useState(false);
+  const [showAll, setShowAll] = useState(false);
+
+  const visibleMembers = showAll ? teamMembers : teamMembers.slice(0, 12);
 
   useEffect(() => {
     setTimeout(() => setAnimate(true), 150);
@@ -381,8 +372,8 @@ const Equipe = () => {
       {/* Team Members Section */}
       <section className="py-20 bg-background">
         <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {teamMembers.map((member, index) => (
+          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-8">
+            {visibleMembers.map((member, index) => (
               <Card
                 key={index}
                 className={`overflow-hidden hover:shadow-lg transition-all duration-700 ease-out ${
@@ -423,6 +414,19 @@ const Equipe = () => {
               </Card>
             ))}
           </div>
+
+          {/* Botão Mostrar Mais */}
+          {!showAll && teamMembers.length > 12 && (
+            <div className="mt-10 text-center">
+              <Button
+                size="lg"
+                onClick={() => setShowAll(true)}
+                className="px-8"
+              >
+                Mostrar mais funcionários
+              </Button>
+            </div>
+          )}
         </div>
       </section>
 
@@ -433,7 +437,7 @@ const Equipe = () => {
       >
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
+            <h2 className="text-4xl font-bold text-foreground mb-4">
               {t("team.orgChart")}
             </h2>
             <p className="text-muted-foreground max-w-2xl mx-auto">
@@ -441,42 +445,46 @@ const Equipe = () => {
             </p>
           </div>
 
-          <div className="max-w-4xl mx-auto space-y-6">
-            {organizationLevels.map((level, index) => (
-              <div
-                key={index}
-                className={`transition-all duration-700 ${
-                  orgVisible
-                    ? "opacity-100 translate-x-0"
-                    : "opacity-0 -translate-x-10"
-                }`}
-                style={{ transitionDelay: `${index * 150}ms` }}
-              >
-                <Card className="overflow-hidden">
-                  <div className={`${level.color} p-1`} />
-                  <CardContent className="p-6">
-                    <div className="flex flex-col md:flex-row md:items-center gap-4">
-                      <div className="md:w-1/3">
-                        <h3 className="text-xl font-bold text-foreground">
-                          {level.level}
-                        </h3>
-                      </div>
-                      <div className="md:w-2/3 flex flex-wrap gap-2">
+          {/* Linha vertical central */}
+          <div className="relative max-w-3xl mx-auto">
+            <div className="absolute left-1/2 top-0 bottom-0 w-1 bg-primary/20 rounded-full -translate-x-1/2" />
+
+            <div className="space-y-12">
+              {organizationLevels.map((level, index) => (
+                <div
+                  key={index}
+                  className={`relative transition-all duration-700 ${
+                    orgVisible
+                      ? "opacity-100 translate-y-0"
+                      : "opacity-0 translate-y-10"
+                  }`}
+                  style={{ transitionDelay: `${index * 180}ms` }}
+                >
+                  {/* Nó do organograma */}
+                  <div className="absolute left-1/2 -top-4 w-6 h-6 rounded-full bg-primary border-4 border-background -translate-x-1/2 shadow" />
+
+                  <Card className="overflow-hidden shadow-md border border-muted/40 backdrop-blur-sm">
+                    <div className={`${level.color} p-2 shadow-inner`} />
+                    <CardContent className="p-6">
+                      <h3 className="text-2xl font-bold text-foreground mb-4 text-center">
+                        {level.level}
+                      </h3>
+
+                      <div className="flex flex-wrap justify-center gap-2">
                         {level.positions.map((position, posIndex) => (
-                          <Badge
+                          <span
                             key={posIndex}
-                            variant="outline"
-                            className="text-sm"
+                            className="px-3 py-1 border rounded-full text-sm bg-muted/40 hover:bg-muted transition-colors"
                           >
                             {position}
-                          </Badge>
+                          </span>
                         ))}
                       </div>
-                    </div>
-                  </CardContent>
-                </Card>
-              </div>
-            ))}
+                    </CardContent>
+                  </Card>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>

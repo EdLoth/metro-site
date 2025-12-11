@@ -96,7 +96,7 @@ const translations = {
     // Areas Section
     "areas.title": "Áreas de Atuação",
     "areas.subtitle":
-      "Experiência consolidada atuando em todo Brasil em diversos segmentos da construção civil",
+      "A Empresa tem um raio de atuação predominantemente em cidades do estado da Bahia expandindo seus serviços para outros estados do Nordeste.",
     "areas.residential": "Residencial",
     "areas.residentialDesc": "Casas, apartamentos e condomínios",
     "areas.commercial": "Comercial",
