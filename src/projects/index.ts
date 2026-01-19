@@ -1,25 +1,28 @@
-import { 
-  Hospital, 
-  TrafficCone, 
-  GraduationCap, 
-  Home, 
-  HardHat, 
-  Trees, 
-  Droplet, 
-  Route, 
-  PaintRoller 
+import {
+  Hospital,
+  TrafficCone,
+  GraduationCap,
+  Home,
+  HardHat,
+  Trees,
+  Droplet,
+  Route,
+  PaintRoller,
 } from "lucide-react";
 
 // Mapeamento que garante que todas as categorias do seu Type tenham um ícone
-export const categoriaIcons: Record<ProjetoEngenharia['categoria'], React.ElementType> = {
-  "Hospitalar": Hospital,
-  "Infraestrutura": TrafficCone, // ou Building2
-  "Educacional": GraduationCap,
-  "Residencial": Home,
-  "Construção": HardHat,
-  "Urbanização": Trees, // ou Map
-  "Saneamento": Droplet,
-  "Estradas": Route,
+export const categoriaIcons: Record<
+  ProjetoEngenharia["categoria"],
+  React.ElementType
+> = {
+  Hospitalar: Hospital,
+  Infraestrutura: TrafficCone, // ou Building2
+  Educacional: GraduationCap,
+  Residencial: Home,
+  Construção: HardHat,
+  Urbanização: Trees, // ou Map
+  Saneamento: Droplet,
+  Estradas: Route,
   "Reformas e Revitalizações": PaintRoller,
 };
 
@@ -50,8 +53,9 @@ export type ProjetoEngenharia = {
   };
   imagens: string[];
   especificacoes: {
-    areaConstruida?: string;
-    [key: string]: string | number | undefined;
+    "Área Construida"?: string;
+    // Adicione string[] aqui
+    [key: string]: string | number | string[] | undefined;
   };
   itensInclusos?: string[];
 };
@@ -63,15 +67,14 @@ export const ICOMProject: ProjetoEngenharia = {
   descricao:
     "Unidade de referência da Bahia especializada exclusivamente no tratamento de doenças transmissíveis de alta complexidade.",
   descricaoCompleta:
-    "Inaugurada em 2018 para substituir a antiga sede histórica da Cidade Baixa, esta unidade opera em uma nova estrutura de ponta próxima à BR-324. O hospital funciona através de uma Parceria Público-Privada e oferece instalações tecnológicas avançadas, desenhadas especificamente para garantir o isolamento adequado e o tratamento seguro de pacientes em uma localização de fácil acesso rodoviário.",
+    "O Instituto Couto Maia (Icom) Localizado em Cajazeiras e inaugurado em julho de 2018, a unidade é referência em infectologia no Brasil e no exterior. Com infraestrutura de ponta, inclui leitos de UTI e diagnósticos avançados por imagem. Sua construção levou 26 meses, divididos entre uma fase inicial acelerada de fundação e estrutura (10 meses) e uma etapa minuciosa de acabamento, climatização e montagem de suporte médico especializado (16 meses)",
 
   status: "Concluído",
   relevancia: 5.0,
   cliente: "SESAB",
-  localizacao: "Salvador, BA",
+  localizacao: "Bairro de Cajazeiras, Salvador – BA.",
   periodo: {
-    duracao: "18 meses",
-    conclusao: "2023-08",
+    duracao: "26 meses",
   },
   imagens: [
     "https://us-west-2.graphassets.com/cmkc1ejod2bpe07lper075xkw/output=format:jpg/cmkd0dumsle7u07muar5dw4cy",
@@ -88,10 +91,10 @@ export const ICOMProject: ProjetoEngenharia = {
     "https://us-west-2.graphassets.com/cmkc1ejod2bpe07lper075xkw/output=format:jpg/cmkd0c849lhcj07na822w93pr",
   ],
   especificacoes: {
-    areaConstruida: "8.500 m²",
-    numeroLeitos: 90,
-    numeroUTIs: 20,
-    centrosCirurgicos: 4,
+    "Área Construida": "19.605,56 m²",
+    "N° de Leitos": 120,
+    "N° Unidades de Terapia Intensiva": ["10 adultos", "10 infantis"],
+    "Centros Cirurgicos": 2,
   },
 };
 
@@ -102,15 +105,16 @@ export const CentroConvencoesProject: ProjetoEngenharia = {
   descricao:
     "Projeto de centro de convenções destinado à realização de eventos, congressos e atividades institucionais, com infraestrutura moderna e capacidade ampliada.",
   descricaoCompleta:
-    "Inaugurada em 2018 para substituir a antiga sede histórica da Cidade Baixa, esta unidade opera em uma nova estrutura de ponta próxima à BR-324. O hospital funciona através de uma Parceria Público-Privada e oferece instalações tecnológicas avançadas, desenhadas especificamente para garantir o isolamento adequado e o tratamento seguro de pacientes em uma localização de fácil acesso rodoviário.",
+    "Projeto de centro de convenções destinado à realização de eventos, o complexo é dividido em dois prédios principais interligados. O pavilhão de convenções é climatizado e voltado para feiras e exposições, enquanto o teatro possui estrutura completa de salas de ensaio, camarins e salas multiuso para atividades culturais e educativas.",
 
   status: "Concluído",
   relevancia: 4.9,
-  cliente: "Governo do Estado",
-  localizacao: "Ilhéus, BA",
+  cliente:
+    "Governo do Estado da Bahia (executado via CONDER - Companhia de Desenvolvimento Urbano).",
+  localizacao:
+    "Rua Juscelino Kubitschek, Bairro São João (antigo Campo do Gado Velho), Feira de Santana - BA.",
   periodo: {
-    duracao: "24 meses",
-    conclusao: "2024-02",
+    duracao: "14 meses",
   },
   imagens: [
     "https://us-west-2.graphassets.com/cmkc1ejod2bpe07lper075xkw/output=format:jpg/cmkdgrfqayno207mua17078ve",
@@ -126,9 +130,11 @@ export const CentroConvencoesProject: ProjetoEngenharia = {
     "https://us-west-2.graphassets.com/cmkc1ejod2bpe07lper075xkw/output=format:jpg/cmkdgrewmyq8a07nac7btftcz",
   ],
   especificacoes: {
-    areaConstruida: "12.000 m²",
-    capacidade: "3.500 pessoas",
-    vagasEstacionamento: 212,
+    "Área Construída": "6.818,32m²",
+    "Capacidade do Teatro": "665 pessoas",
+    "Capacidade Total":
+      "Espaço para até 1.600 pessoas, além de um auditório anexo com 224 lugares",
+    "Vagas de Estacionamento": 212,
   },
 };
 
@@ -142,11 +148,11 @@ export const VLTProject: ProjetoEngenharia = {
     "Inaugurada em 2018 para substituir a antiga sede histórica da Cidade Baixa, esta unidade opera em uma nova estrutura de ponta próxima à BR-324. O hospital funciona através de uma Parceria Público-Privada e oferece instalações tecnológicas avançadas, desenhadas especificamente para garantir o isolamento adequado e o tratamento seguro de pacientes em uma localização de fácil acesso rodoviário.",
   status: "Em andamento",
   relevancia: 5,
-  cliente: "CTB - Companhia de Transportes",
+  cliente:
+    "Governo do Estado da Bahia - através da CTB (Companhia de Transportes do Estado da Bahia)",
   localizacao: "Região Metropolitana de Salvador",
   periodo: {
-    inicio: "2024-01",
-    conclusao: "Previsão: 2026-12",
+    inicio: "14 de junho de 2024",
   },
   imagens: [
     "https://us-west-2.graphassets.com/cmkc1ejod2bpe07lper075xkw/output=format:jpg/cmkd4cqe2rgk107muxdtsfm5i",
@@ -156,10 +162,27 @@ export const VLTProject: ProjetoEngenharia = {
     "https://us-west-2.graphassets.com/cmkc1ejod2bpe07lper075xkw/output=format:jpg/cmkd4c4tyrf0r07muqfvjlox9",
   ],
   especificacoes: {
-    extensaoLinha: "11,5 km",
-    numeroEstacoes: 14,
-    bairrosAtendidos: 8,
-    mediaPopulacaoAtendida: "250.000 hab/dia",
+    
+    "Qtd. Bairros Atendidos": [
+      "Ilha de São João (Simões Filho)",
+      "Paripe",
+      "Periperi",
+      "Praia Grande",
+      "Itacaranha",
+      "Plataforma",
+      "Lobato",
+      "Santa Luzia",
+      "Baixa do Fiscal",
+      "Calçada",
+      "Comércio (Mercado Modelo)",
+    ],
+    "N° de Estações": [
+      "1 Estação – Calçada",
+      "18 Paradas de passageiros",
+      "2 Pátios de Manutenção de trens (Calçada e Periperi)",
+    ],
+    "Extensão da Linha": "16.66km de via permanente.",
+    "Média População Atendida": "Cerca de 420mil hab/dia",
   },
 };
 
@@ -170,22 +193,22 @@ export const EdificioGaragemProject: ProjetoEngenharia = {
   descricao:
     "Edifício destinado ao estacionamento vertical, projetado para atender demandas urbanas e institucionais.",
   descricaoCompleta:
-    "Inaugurada em 2018 para substituir a antiga sede histórica da Cidade Baixa, esta unidade opera em uma nova estrutura de ponta próxima à BR-324. O hospital funciona através de uma Parceria Público-Privada e oferece instalações tecnológicas avançadas, desenhadas especificamente para garantir o isolamento adequado e o tratamento seguro de pacientes em uma localização de fácil acesso rodoviário.",
+    "Edifício destinado ao estacionamento vertical, projetado para atender demandas urbanas e institucionais.",
   status: "Concluído",
   relevancia: 4.2,
-  cliente: "Prefeitura de Feira de Santana",
-  localizacao: "Centro, Feira de Santana - BA",
+  cliente: "Prefeitura de Feira de Santana vindulado à SEDUC",
+  localizacao:
+    "Rua Barão de Cotegipe, Centro (Antigo Feira Tênis Clube) – Feira de Santana - BA.",
   periodo: {
-    duracao: "10 meses",
-    conclusao: "2022-11",
+    duracao: "21 meses ",
   },
   imagens: [
     "https://us-west-2.graphassets.com/cmkc1ejod2bpe07lper075xkw/output=format:jpg/cmkdhlvglyxyu07nankeqir3x",
   ],
   especificacoes: {
-    areaConstruida: "6.200 m²",
-    numeroVagas: 450,
-    quantidadePavimentos: 6,
+    "Área Construída": "6.200 m²",
+    "N° de Vagas": 441,
+    "Quantidade de Pavimentos": 7,
   },
 };
 
@@ -196,13 +219,14 @@ export const CleristonAndradeProject: ProjetoEngenharia = {
   descricao:
     "Projeto hospitalar de grande porte, com ampliação e modernização da infraestrutura de atendimento à saúde.",
   descricaoCompleta:
-    "Inaugurada em 2018 para substituir a antiga sede histórica da Cidade Baixa, esta unidade opera em uma nova estrutura de ponta próxima à BR-324. O hospital funciona através de uma Parceria Público-Privada e oferece instalações tecnológicas avançadas, desenhadas especificamente para garantir o isolamento adequado e o tratamento seguro de pacientes em uma localização de fácil acesso rodoviário.",
+    "Hospital Geral Clériston Andrade (HGCA II). A ampliação do complexo hospitalar Clériston Andrade, em Feira de Santana, compreende uma estrutura de alta complexidade com 8.000 m² de área construída. Executada em apenas 14 meses, a obra entregou uma das unidades mais tecnológicas do estado.",
   status: "Concluído",
   relevancia: 3.8,
   cliente: "SESAB",
-  localizacao: "Feira de Santana, BA",
+  localizacao:
+    "Avenida Eduardo Fróes da Mota, S/N, Bairro 35º BI, Feira de Santana - BA",
   periodo: {
-    duracao: "22 meses",
+    duracao: "14 meses",
     conclusao: "2023-05",
   },
   imagens: [
@@ -214,10 +238,12 @@ export const CleristonAndradeProject: ProjetoEngenharia = {
     "https://us-west-2.graphassets.com/cmkc1ejod2bpe07lper075xkw/output=format:jpg/cmkdhglu8ytwd07mu82cfveeo",
   ],
   especificacoes: {
-    areaConstruida: "24.000 m²",
-    numeroLeitos: 300,
-    numeroUTIs: 40,
-    centrosCirurgicos: 10,
+    "Área Construída": "24.000 m²",
+    "N° de UTIs": 40,
+    "Salas de Cirurgia": 11,
+    "Salas de Tomografia": 2,
+    "Salas de Raios-X": 2,
+    "Sala de Ressonância": 1,
   },
 };
 
@@ -228,14 +254,13 @@ export const EscolaDivaPortelaProject: ProjetoEngenharia = {
   descricao:
     "Projeto educacional com estrutura completa para ensino, esporte e convivência.",
   descricaoCompleta:
-    "Inaugurada em 2018 para substituir a antiga sede histórica da Cidade Baixa, esta unidade opera em uma nova estrutura de ponta próxima à BR-324. O hospital funciona através de uma Parceria Público-Privada e oferece instalações tecnológicas avançadas, desenhadas especificamente para garantir o isolamento adequado e o tratamento seguro de pacientes em uma localização de fácil acesso rodoviário.",
+    "A obra de reconstrução total da Escola Diva Portela abrangeu cerca de 3.500 m² de área construída. O projeto estrutural priorizou a verticalização para otimizar o terreno, distribuindo 14 salas de aula climatizadas, laboratórios e auditório, além de uma infraestrutura esportiva de alto padrão com ginásio poliesportivo e piscina semiolímpica aquecida. A execução focou na integração de sistemas sustentáveis, como o aquecimento solar, e no cumprimento rigoroso das normas de acessibilidade, consolidando um equipamento público de alta durabilidade e baixo custo de manutenção.",
   status: "Concluído",
   relevancia: 3.5,
   cliente: "Prefeitura de Feira de Santana",
-  localizacao: "Bairro Jardim Cruzeiro, Feira de Santana - BA",
+  localizacao: "Rua Juvêncio Erudilho, Bairro Centro , Feira de Santana - BA.",
   periodo: {
-    duracao: "12 meses",
-    conclusao: "2023-01",
+    duracao: "19 meses",
   },
   imagens: [
     "https://us-west-2.graphassets.com/cmkc1ejod2bpe07lper075xkw/output=format:jpg/cmkdhlvglyxyu07nankeqir3x",
@@ -263,16 +288,17 @@ export const EscolaDivaPortelaProject: ProjetoEngenharia = {
     "https://us-west-2.graphassets.com/cmkc1ejod2bpe07lper075xkw/output=format:jpg/cmkdhltimyuzs07mupt0gl076",
   ],
   especificacoes: {
-    areaConstruida: "3.800 m²",
-    numeroSalasAula: 15,
+    "Área Construída": "3.500 m²",
+    "N° de Salas de Aula": 14,
   },
   itensInclusos: [
-    "Piscina",
+    "Piscina semiolímpica aquecida",
     "Quadra poliesportiva",
     "Vestiário",
     "Biblioteca",
     "Auditório",
-    "Laboratório",
+    "Laboratório de Ciências",
+    "Laboratório de Informática/Robótica",
     "Refeitório",
   ],
 };
@@ -297,10 +323,10 @@ export const MCMVProject: ProjetoEngenharia = {
     "https://us-west-2.graphassets.com/cmkc1ejod2bpe07lper075xkw/output=format:jpg/cmkdhlvglyxyu07nankeqir3x",
   ],
   especificacoes: {
-    unidadesHabitacionais: 400,
-    areaConstruida: "18.500 m²",
-    areaTerreno: "55.000 m²",
-    areaPavimentada: "12.000 m²",
+    "Unidades Habitacionais": 400,
+    "Área Construída": "18.500 m²",
+    "Área do Terreno": "55.000 m²",
+    "Área Pavimentada": "12.000 m²",
   },
   itensInclusos: ["Parque infantil", "Associação dos moradores"],
 };
@@ -334,8 +360,8 @@ export const ViaBarradaoProject: ProjetoEngenharia = {
     "https://us-west-2.graphassets.com/cmkc1ejod2bpe07lper075xkw/output=format:jpg/cmkdhzu6oz17i07nahicxye78",
   ],
   especificacoes: {
-    extensaoVia: "4,2 km",
-    tipoPavimento: "Asfalto CBUQ",
+    "Extensão da Via": "4,2 km",
+    "Tipo de Pavimento": "Asfalto CBUQ",
   },
 };
 

@@ -13,7 +13,6 @@ import {
   Building2,
   ArrowLeft,
   ArrowRight,
-  // Novos ícones importados para as categorias:
   Hospital,
   TrafficCone,
   GraduationCap,
@@ -237,7 +236,16 @@ const ProjectDetail = () => {
                             <p className="font-semibold text-foreground">
                               {label}
                             </p>
-                            <p className="text-muted-foreground">{value}</p>
+                            {/* Renderização condicional para Array ou String/Number */}
+                            {Array.isArray(value) ? (
+                              <ul className="list-disc list-inside text-muted-foreground mt-1 space-y-1">
+                                {value.map((item, idx) => (
+                                  <li key={idx} className="text-sm">{item}</li>
+                                ))}
+                              </ul>
+                            ) : (
+                              <p className="text-muted-foreground">{value}</p>
+                            )}
                           </div>
                         </div>
                       );
@@ -327,7 +335,10 @@ const ProjectDetail = () => {
                             Área Construída
                         </p>
                         <p className="font-semibold text-foreground">
-                            {project.especificacoes.areaConstruida}
+                            {/* Garante que renderize como string mesmo se for array por engano */}
+                            {Array.isArray(project.especificacoes.areaConstruida) 
+                              ? project.especificacoes.areaConstruida.join(", ") 
+                              : project.especificacoes.areaConstruida}
                         </p>
                         </div>
                     </div>
