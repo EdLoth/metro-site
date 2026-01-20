@@ -196,7 +196,7 @@ export const EdificioGaragemProject: ProjetoEngenharia = {
     "Edifício destinado ao estacionamento vertical, projetado para atender demandas urbanas e institucionais.",
   status: "Concluído",
   relevancia: 4.2,
-  cliente: "Prefeitura de Feira de Santana vindulado à SEDUC",
+  cliente: "Prefeitura Municipal de Feira de Santana (vinculado à Secretaria Municipal de Educação - SEDUC).",
   localizacao:
     "Rua Barão de Cotegipe, Centro (Antigo Feira Tênis Clube) – Feira de Santana - BA.",
   periodo: {
@@ -206,8 +206,8 @@ export const EdificioGaragemProject: ProjetoEngenharia = {
     "https://us-west-2.graphassets.com/cmkc1ejod2bpe07lper075xkw/output=format:jpg/cmkdhlvglyxyu07nankeqir3x",
   ],
   especificacoes: {
-    "Área Construída": "6.200 m²",
-    "N° de Vagas": 441,
+    "Área Construída": "Aproximadamente 11178,00 m² (integrado ao complexo da nova sede da Secretaria Municipal de Educação).",
+    "N° de Vagas": ":453 vagas no total (sendo 411 para carros e 42 para motocicletas).",
     "Quantidade de Pavimentos": 7,
   },
 };
@@ -254,11 +254,11 @@ export const EscolaDivaPortelaProject: ProjetoEngenharia = {
   descricao:
     "Projeto educacional com estrutura completa para ensino, esporte e convivência.",
   descricaoCompleta:
-    "A obra de reconstrução total da Escola Diva Portela abrangeu cerca de 3.500 m² de área construída. O projeto estrutural priorizou a verticalização para otimizar o terreno, distribuindo 14 salas de aula climatizadas, laboratórios e auditório, além de uma infraestrutura esportiva de alto padrão com ginásio poliesportivo e piscina semiolímpica aquecida. A execução focou na integração de sistemas sustentáveis, como o aquecimento solar, e no cumprimento rigoroso das normas de acessibilidade, consolidando um equipamento público de alta durabilidade e baixo custo de manutenção.",
+    "A obra de reconstrução total da Escola Diva Portela abrangeu cerca de 3.500 m² de área construída, transformando a unidade em um complexo moderno e acessível em 19 meses de execução. O projeto estrutural priorizou a verticalização para otimizar o terreno, distribuindo 15 salas de aula climatizadas, laboratórios e auditório, além de uma infraestrutura esportiva de alto padrão com ginásio poliesportivo e piscina olímpica. A execução focou na integração de sistemas sustentáveis, como o aquecimento solar, e no cumprimento rigoroso das normas de acessibilidade, consolidando um equipamento público de alta durabilidade e baixo custo de manutenção.",
   status: "Concluído",
   relevancia: 3.5,
   cliente: "Prefeitura de Feira de Santana",
-  localizacao: "Rua Juvêncio Erudilho, Bairro Centro , Feira de Santana - BA.",
+  localizacao: "Rua Esplanada, Bairro JARDIM CRUZEIRO (próximo à região do Estádio Joia da Princesa), Feira de Santana - BA.",
   periodo: {
     duracao: "19 meses",
   },
@@ -289,16 +289,16 @@ export const EscolaDivaPortelaProject: ProjetoEngenharia = {
   ],
   especificacoes: {
     "Área Construída": "3.500 m²",
-    "N° de Salas de Aula": 14,
+    "N° de Salas de Aula": 15,
   },
   itensInclusos: [
-    "Piscina semiolímpica aquecida",
+    "Piscina olímpica aquecida",
     "Quadra poliesportiva",
     "Vestiário",
     "Biblioteca",
     "Auditório",
-    "Laboratório de Ciências",
-    "Laboratório de Informática/Robótica",
+    // "Laboratório de Ciências",
+    // "Laboratório de Informática/Robótica",
     "Refeitório",
   ],
 };
