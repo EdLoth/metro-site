@@ -93,7 +93,8 @@ const Projects = () => {
               {t("projects.title")}
             </h1>
             <p className="text-lg text-primary-foreground/90 max-w-2xl mx-auto">
-              Carteira completa de obras executadas e em andamento.
+               Explore nossa trajetória através de projetos que unem precisão técnica, 
+              inovação sustentável e compromisso com o futuro das cidades.
             </p>
         </div>
       </section>
@@ -270,11 +271,7 @@ const Projects = () => {
                             {project.categoria}
                          </Badge>
                       </div>
-                      <div className="absolute top-3 right-3">
-                        <Badge className={`${statusColors[project.status] || "bg-gray-100 text-gray-800"}`}>
-                          {project.status}
-                        </Badge>
-                      </div>
+                    
                     </div>
                     <CardContent className="p-5 flex-1 flex flex-col">
                       <h3 className="text-lg font-bold mb-2 group-hover:text-primary transition-colors line-clamp-1">

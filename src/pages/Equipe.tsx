@@ -3,12 +3,11 @@ import Footer from "@/components/Footer";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Users, Award, Briefcase, GraduationCap } from "lucide-react";
+import { Users, Award, Briefcase, GraduationCap, ChevronDown, ChevronUp } from "lucide-react";
 import { useIntersectionObserver } from "@/hooks/useIntersectionObserver";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useEffect, useState } from "react";
 
-// Array de imagens fictícias
 const placeholderImages = [
   "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400&h=400&fit=crop",
   "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&h=400&fit=crop",
@@ -18,7 +17,6 @@ const placeholderImages = [
   "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=400&h=400&fit=crop",
 ];
 
-// Lista completa com informações fictícias
 const teamMembers = [
   {
     name: "Adriana Francisca de Santana",
@@ -52,7 +50,6 @@ const teamMembers = [
     registration: "CREA 67890/SP",
     image: placeholderImages[0],
   },
-
   {
     name: "Ronnie Burgos Abbehusen",
     role: "Responsável Técnico",
@@ -61,8 +58,6 @@ const teamMembers = [
     registration: "CREA 78901/SP",
     image: placeholderImages[1],
   },
-
-  // Quadro Técnico
   {
     name: "Ailton de Sousa Gonçalves",
     role: "Quadro Técnico",
@@ -278,6 +273,7 @@ const organizationLevels = [
       "Diretor Administrativo-Financeiro - Anderson Santos Azevedo",
     ],
     color: "bg-secondary",
+    stack: true,
   },
   {
     level: "Responsáveis Técnicos",
@@ -321,18 +317,16 @@ const organizationLevels = [
 ];
 
 const Equipe = () => {
-  const { ref: headerRef, isVisible: headerVisible } = useIntersectionObserver({
-    threshold: 0.1,
-  });
-  const { ref: orgRef, isVisible: orgVisible } = useIntersectionObserver({
-    threshold: 0.1,
-  });
+  const { ref: headerRef, isVisible: headerVisible } = useIntersectionObserver({ threshold: 0.1 });
+  const { ref: orgRef, isVisible: orgVisible } = useIntersectionObserver({ threshold: 0.1 });
+  const { ref: teamSectionRef, isVisible: teamSectionVisible } = useIntersectionObserver({ threshold: 0.05 });
 
   const { t } = useLanguage();
   const [animate, setAnimate] = useState(false);
   const [showAll, setShowAll] = useState(false);
 
-  const visibleMembers = showAll ? teamMembers : teamMembers.slice(0, 12);
+  const initialLimit = 8;
+  const visibleMembers = showAll ? teamMembers : teamMembers.slice(0, initialLimit);
 
   useEffect(() => {
     setTimeout(() => setAnimate(true), 150);
@@ -342,139 +336,50 @@ const Equipe = () => {
     <div className="min-h-screen bg-background">
       <Navigation />
 
-      {/* Hero Section */}
       <section className="pt-20 pb-20 bg-gradient-to-br from-primary to-primary-dark text-primary-foreground">
-        <div className="container mx-auto px-4">
-          <div
-            ref={headerRef}
-            className={`max-w-4xl mx-auto text-center transition-all duration-1000 ${
-              headerVisible
-                ? "opacity-100 translate-y-0"
-                : "opacity-0 translate-y-10"
-            }`}
-          >
+        <div className="container mx-auto px-4 text-center">
+          <div ref={headerRef} className={`transition-all duration-1000 ${headerVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"}`}>
             <div className="inline-flex items-center gap-2 bg-white px-4 py-2 rounded-full mb-6">
               <Users className="w-5 h-5 text-primary" />
-              <span className="text-sm font-medium text-primary">
-                {t("team.ourTeam")}
-              </span>
+              <span className="text-sm font-medium text-primary">{t("team.ourTeam")}</span>
             </div>
-            <h1 className="text-5xl md:text-6xl font-bold mb-6">
-              {t("team.title")}
-            </h1>
-            <p className="text-xl text-primary-foreground/90">
-              {t("team.subtitle")}
-            </p>
+            <h1 className="text-5xl md:text-6xl font-bold mb-6">{t("team.title")}</h1>
+            <p className="text-xl text-primary-foreground/90 max-w-3xl mx-auto">{t("team.subtitle")}</p>
           </div>
         </div>
       </section>
 
-      {/* Team Members Section */}
-      <section className="py-20 bg-background">
-        <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-8">
-            {visibleMembers.map((member, index) => (
-              <Card
-                key={index}
-                className={`overflow-hidden hover:shadow-lg transition-all duration-700 ease-out ${
-                  animate
-                    ? "opacity-100 translate-y-0"
-                    : "opacity-0 translate-y-10"
-                }`}
-                style={{ transitionDelay: `${index * 70}ms` }}
-              >
-                <div className="aspect-square overflow-hidden">
-                  <img
-                    src={member.image}
-                    alt={member.name}
-                    className="w-full h-full object-cover hover:scale-110 transition-transform duration-500"
-                  />
-                </div>
-                <CardContent className="p-6">
-                  <h3 className="text-xl font-bold text-foreground mb-2">
-                    {member.name}
-                  </h3>
-                  <Badge className="mb-3">{member.role}</Badge>
-
-                  <div className="space-y-2 text-sm text-muted-foreground">
-                    <div className="flex items-center gap-2">
-                      <Award className="w-4 h-4 text-primary" />
-                      <span>{member.specialization}</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <Briefcase className="w-4 h-4 text-primary" />
-                      <span>{member.experience}</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <GraduationCap className="w-4 h-4 text-primary" />
-                      <span>{member.registration}</span>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-
-          {/* Botão Mostrar Mais */}
-          {!showAll && teamMembers.length > 12 && (
-            <div className="mt-10 text-center">
-              <Button
-                size="lg"
-                onClick={() => setShowAll(true)}
-                className="px-8"
-              >
-                Mostrar mais funcionários
-              </Button>
-            </div>
-          )}
-        </div>
-      </section>
-
-      {/* Organizational Chart Section */}
-      <section
-        ref={orgRef}
-        className="py-20 bg-gradient-to-br from-muted/30 to-background"
-      >
+      <section ref={orgRef} className="py-20 bg-muted/20">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-foreground mb-4">
-              {t("team.orgChart")}
-            </h2>
-            <p className="text-muted-foreground max-w-2xl mx-auto">
-              {t("team.orgChartSubtitle")}
-            </p>
+            <h2 className="text-4xl font-bold mb-4">{t("team.orgChart")}</h2>
+            <p className="text-muted-foreground max-w-2xl mx-auto">{t("team.orgChartSubtitle")}</p>
           </div>
 
-          {/* Linha vertical central */}
-          <div className="relative max-w-3xl mx-auto">
+          <div className="relative max-w-4xl mx-auto">
             <div className="absolute left-1/2 top-0 bottom-0 w-1 bg-primary/20 rounded-full -translate-x-1/2" />
-
             <div className="space-y-12">
               {organizationLevels.map((level, index) => (
                 <div
                   key={index}
-                  className={`relative transition-all duration-700 ${
-                    orgVisible
-                      ? "opacity-100 translate-y-0"
-                      : "opacity-0 translate-y-10"
-                  }`}
-                  style={{ transitionDelay: `${index * 180}ms` }}
+                  className={`relative transition-all duration-700 ${orgVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"}`}
+                  style={{ transitionDelay: `${index * 150}ms` }}
                 >
-                  {/* Nó do organograma */}
-                  <div className="absolute left-1/2 -top-4 w-6 h-6 rounded-full bg-primary border-4 border-background -translate-x-1/2 shadow" />
-
-                  <Card className="overflow-hidden shadow-md border border-muted/40 backdrop-blur-sm">
-                    <div className={`${level.color} p-2 shadow-inner`} />
-                    <CardContent className="p-6">
-                      <h3 className="text-2xl font-bold text-foreground mb-4 text-center">
-                        {level.level}
-                      </h3>
-
-                      <div className="flex flex-wrap justify-center gap-2">
+                  <div className="absolute left-1/2 -top-4 w-6 h-6 rounded-full bg-primary border-4 border-background -translate-x-1/2 shadow-sm" />
+                  <Card className="overflow-hidden border-muted/40">
+                    <div className={`${level.color} h-2 w-full`} />
+                    <CardContent className="p-8">
+                      <h3 className="text-xl font-bold mb-6 text-center tracking-tight uppercase text-muted-foreground/80">{level.level}</h3>
+                      
+                      <div className={`flex ${level.stack ? "flex-col items-center gap-4" : "flex-wrap justify-center gap-2"}`}>
                         {level.positions.map((position, posIndex) => (
                           <span
                             key={posIndex}
-                            className="px-3 py-1 border rounded-full text-sm bg-muted/40 hover:bg-muted transition-colors"
+                            className={`border text-xs font-medium transition-all cursor-default whitespace-nowrap
+                              ${level.stack 
+                                ? "px-8 py-4 bg-secondary/10 border-primary/20 text-sm md:text-base text-center w-full sm:w-auto min-w-[300px] rounded-xl shadow-sm" 
+                                : "px-4 py-1.5 bg-background hover:bg-primary hover:text-white border-muted-foreground/20 rounded-full"
+                              }`}
                           >
                             {position}
                           </span>

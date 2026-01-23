@@ -12,6 +12,8 @@ import Projects from "./pages/Projects";
 import ProjectDetail from "./pages/ProjectDetail";
 import NotFound from "./pages/NotFound";
 import { ScrollController } from "./components/ScrollController";
+import ProjectDetailNew from "./pages/ProjectDetailNew";
+import ProjectsNew from "./pages/ProjectsNew";
 
 const queryClient = new QueryClient();
 
@@ -32,7 +34,10 @@ const App = () => {
               <Route path="/institucional" element={<Institucional />} />
               <Route path="/equipe" element={<Equipe />} />
               <Route path="/projetos" element={<Projects />} />
+              <Route path="/projetos2" element={<ProjectsNew />} />
               <Route path="/projeto/:id" element={<ProjectDetail />} />
+              <Route path="/projeto2/:id" element={<ProjectDetailNew />} />
+
               <Route path="*" element={<NotFound />} />
             </Routes>
           </BrowserRouter>

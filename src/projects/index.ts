@@ -22,8 +22,7 @@ export const categoriaIcons: Record<
   Construção: HardHat,
   Urbanização: Trees, // ou Map
   Saneamento: Droplet,
-  Estradas: Route,
-  "Reformas e Revitalizações": PaintRoller,
+  "Reformas": PaintRoller,
 };
 
 export type ProjetoEngenharia = {
@@ -36,8 +35,7 @@ export type ProjetoEngenharia = {
     | "Construção"
     | "Urbanização"
     | "Saneamento"
-    | "Estradas"
-    | "Reformas e Revitalizações";
+    | "Reformas";
   titulo: string;
   descricao: string;
   descricaoCompleta?: string;
@@ -63,18 +61,18 @@ export type ProjetoEngenharia = {
 export const ICOMProject: ProjetoEngenharia = {
   id: "prj_icom_01",
   categoria: "Hospitalar",
-  titulo: "Hospital (Projeto ICOM)",
+  titulo: "Instituto Couto Maia - ICOM",
   descricao:
     "Unidade de referência da Bahia especializada exclusivamente no tratamento de doenças transmissíveis de alta complexidade.",
   descricaoCompleta:
-    "O Instituto Couto Maia (Icom) Localizado em Cajazeiras e inaugurado em julho de 2018, a unidade é referência em infectologia no Brasil e no exterior. Com infraestrutura de ponta, inclui leitos de UTI e diagnósticos avançados por imagem. Sua construção levou 26 meses, divididos entre uma fase inicial acelerada de fundação e estrutura (10 meses) e uma etapa minuciosa de acabamento, climatização e montagem de suporte médico especializado (16 meses)",
+    "O Instituto Couto Maia (Icom) Localizado em Cajazeiras e inaugurado em julho de 2018, a unidade é referência em infectologia no Brasil. Com infraestrutura de ponta, inclui leitos de UTI e diagnósticos avançados por imagem. Sua construção levou 26 meses, divididos entre uma fase inicial acelerada de fundação e estrutura (10 meses) e uma etapa minuciosa de acabamento, climatização e montagem de suporte médico especializado (16 meses)",
 
   status: "Concluído",
   relevancia: 5.0,
   cliente: "SESAB",
   localizacao: "Bairro de Cajazeiras, Salvador – BA.",
   periodo: {
-    duracao: "26 meses",
+    duracao: "16 meses",
   },
   imagens: [
     "https://us-west-2.graphassets.com/cmkc1ejod2bpe07lper075xkw/output=format:jpg/cmkd0dumsle7u07muar5dw4cy",
@@ -121,12 +119,10 @@ export const CentroConvencoesProject: ProjetoEngenharia = {
     "https://us-west-2.graphassets.com/cmkc1ejod2bpe07lper075xkw/output=format:jpg/cmkdgrfnwynnv07mufx6tmket",
     "https://us-west-2.graphassets.com/cmkc1ejod2bpe07lper075xkw/output=format:jpg/cmkdgrfkryq9707naieumu358",
     "https://us-west-2.graphassets.com/cmkc1ejod2bpe07lper075xkw/output=format:jpg/cmkdgrfi8ynno07mugx5oefj9",
-    "https://us-west-2.graphassets.com/cmkc1ejod2bpe07lper075xkw/output=format:jpg/cmkdgrfi8ynno07mugx5oefj9",
     "https://us-west-2.graphassets.com/cmkc1ejod2bpe07lper075xkw/output=format:jpg/cmkdgrfblyq8o07nazg0eh9vb",
     "https://us-west-2.graphassets.com/cmkc1ejod2bpe07lper075xkw/output=format:jpg/cmkdgrf86ynmv07mu2bewaah3",
     "https://us-west-2.graphassets.com/cmkc1ejod2bpe07lper075xkw/output=format:jpg/cmkdgrf4zynmo07muu2ex3lnn",
     "https://us-west-2.graphassets.com/cmkc1ejod2bpe07lper075xkw/output=format:jpg/cmkdgrf0iyq8h07na9bb952cq",
-    "https://us-west-2.graphassets.com/cmkc1ejod2bpe07lper075xkw/output=format:jpg/cmkdgrewmyq8a07nac7btftcz",
     "https://us-west-2.graphassets.com/cmkc1ejod2bpe07lper075xkw/output=format:jpg/cmkdgrewmyq8a07nac7btftcz",
   ],
   especificacoes: {
@@ -157,7 +153,6 @@ export const VLTProject: ProjetoEngenharia = {
   imagens: [
     "https://us-west-2.graphassets.com/cmkc1ejod2bpe07lper075xkw/output=format:jpg/cmkd4cqe2rgk107muxdtsfm5i",
     "https://us-west-2.graphassets.com/cmkc1ejod2bpe07lper075xkw/output=format:jpg/cmkd4c52krf1507mugw77desd",
-    "https://us-west-2.graphassets.com/cmkc1ejod2bpe07lper075xkw/output=format:jpg/cmkd4c507rf0y07mu8yk2apza",
     "https://us-west-2.graphassets.com/cmkc1ejod2bpe07lper075xkw/output=format:jpg/cmkd4c507rf0y07mu8yk2apza",
     "https://us-west-2.graphassets.com/cmkc1ejod2bpe07lper075xkw/output=format:jpg/cmkd4c4tyrf0r07muqfvjlox9",
   ],
@@ -203,11 +198,21 @@ export const EdificioGaragemProject: ProjetoEngenharia = {
     duracao: "21 meses ",
   },
   imagens: [
-    "https://us-west-2.graphassets.com/cmkc1ejod2bpe07lper075xkw/output=format:jpg/cmkdhlvglyxyu07nankeqir3x",
+    "https://us-west-2.graphassets.com/cmkc1ejod2bpe07lper075xkw/output=format:jpg/cmkqz3apdqid007n8jm9bnf50",
+    "https://us-west-2.graphassets.com/cmkc1ejod2bpe07lper075xkw/output=format:jpg/cmkqz3asaqbbi07naqtlkb8gk",
+    "https://us-west-2.graphassets.com/cmkc1ejod2bpe07lper075xkw/output=format:jpg/cmkqz3ajuqiby07n84lsl92mv",
+    "https://us-west-2.graphassets.com/cmkc1ejod2bpe07lper075xkw/output=format:jpg/cmkqz3agwqbb407nato2isych",
+    "https://us-west-2.graphassets.com/cmkc1ejod2bpe07lper075xkw/output=format:jpg/cmkqz39x5qibd07n8qmr84j45",
+    "https://us-west-2.graphassets.com/cmkc1ejod2bpe07lper075xkw/output=format:jpg/cmkqz3a3iqibk07n8rmp0622b",
+    "https://us-west-2.graphassets.com/cmkc1ejod2bpe07lper075xkw/output=format:jpg/cmkqz3a70qbaq07naci1sav4i",
+    "https://us-west-2.graphassets.com/cmkc1ejod2bpe07lper075xkw/output=format:jpg/cmkqz39tjqba207nag5jzaeye",
+    "https://us-west-2.graphassets.com/cmkc1ejod2bpe07lper075xkw/output=format:jpg/cmkqz3aanqbax07naqb07744o",
+    "https://us-west-2.graphassets.com/cmkc1ejod2bpe07lper075xkw/output=format:jpg/cmkqz3a08qbaj07nac497hzlu"
+
   ],
   especificacoes: {
     "Área Construída": "Aproximadamente 11178,00 m² (integrado ao complexo da nova sede da Secretaria Municipal de Educação).",
-    "N° de Vagas": ":453 vagas no total (sendo 411 para carros e 42 para motocicletas).",
+    "N° de Vagas": "453 vagas no total (sendo 411 para carros e 42 para motocicletas).",
     "Quantidade de Pavimentos": 7,
   },
 };
@@ -232,9 +237,7 @@ export const CleristonAndradeProject: ProjetoEngenharia = {
   imagens: [
     "https://us-west-2.graphassets.com/cmkc1ejod2bpe07lper075xkw/output=format:jpg/cmkdhgm2aytwk07murengz816",
     "https://us-west-2.graphassets.com/cmkc1ejod2bpe07lper075xkw/output=format:jpg/cmkdhgljlywmm07nasmvo97e4",
-    "https://us-west-2.graphassets.com/cmkc1ejod2bpe07lper075xkw/output=format:jpg/cmkdhgljlywmm07nasmvo97e4",
     "https://us-west-2.graphassets.com/cmkc1ejod2bpe07lper075xkw/output=format:jpg/cmkdhglr4ywn007na6taig36c",
-    "https://us-west-2.graphassets.com/cmkc1ejod2bpe07lper075xkw/output=format:jpg/cmkdhglu8ytwd07mu82cfveeo",
     "https://us-west-2.graphassets.com/cmkc1ejod2bpe07lper075xkw/output=format:jpg/cmkdhglu8ytwd07mu82cfveeo",
   ],
   especificacoes: {
@@ -266,24 +269,17 @@ export const EscolaDivaPortelaProject: ProjetoEngenharia = {
     "https://us-west-2.graphassets.com/cmkc1ejod2bpe07lper075xkw/output=format:jpg/cmkdhlvglyxyu07nankeqir3x",
     "https://us-west-2.graphassets.com/cmkc1ejod2bpe07lper075xkw/output=format:jpg/cmkdhlvdgyxyn07na4ktony5m",
     "https://us-west-2.graphassets.com/cmkc1ejod2bpe07lper075xkw/output=format:jpg/cmkdhlvaoyv2b07muqbp1kr6d",
-    "https://us-west-2.graphassets.com/cmkc1ejod2bpe07lper075xkw/output=format:jpg/cmkdhlvaoyv2b07muqbp1kr6d",
     "https://us-west-2.graphassets.com/cmkc1ejod2bpe07lper075xkw/output=format:jpg/cmkdhlv47yv2407mus4i8a5h2",
     "https://us-west-2.graphassets.com/cmkc1ejod2bpe07lper075xkw/output=format:jpg/cmkdhlv0zyxy907na7gv5hqh0",
-    "https://us-west-2.graphassets.com/cmkc1ejod2bpe07lper075xkw/output=format:jpg/cmkdhluy5yxy207nac3kbknuq",
-    "https://us-west-2.graphassets.com/cmkc1ejod2bpe07lper075xkw/output=format:jpg/cmkdhluy5yxy207nac3kbknuq",
     "https://us-west-2.graphassets.com/cmkc1ejod2bpe07lper075xkw/output=format:jpg/cmkdhluy5yxy207nac3kbknuq",
     "https://us-west-2.graphassets.com/cmkc1ejod2bpe07lper075xkw/output=format:jpg/cmkdhluooyv1g07mu08tbtnmu",
     "https://us-west-2.graphassets.com/cmkc1ejod2bpe07lper075xkw/output=format:jpg/cmkdhluloyxxo07nazq8mtycu",
     "https://us-west-2.graphassets.com/cmkc1ejod2bpe07lper075xkw/output=format:jpg/cmkdhlui7yv1907muk3mpe3r4",
-    "https://us-west-2.graphassets.com/cmkc1ejod2bpe07lper075xkw/output=format:jpg/cmkdhlui7yv1907muk3mpe3r4",
-    "https://us-west-2.graphassets.com/cmkc1ejod2bpe07lper075xkw/output=format:jpg/cmkdhlucfyxxh07nam20yhk6k",
-    "https://us-west-2.graphassets.com/cmkc1ejod2bpe07lper075xkw/output=format:jpg/cmkdhlucfyxxh07nam20yhk6k",
     "https://us-west-2.graphassets.com/cmkc1ejod2bpe07lper075xkw/output=format:jpg/cmkdhlucfyxxh07nam20yhk6k",
     "https://us-west-2.graphassets.com/cmkc1ejod2bpe07lper075xkw/output=format:jpg/cmkdhlu2vyxx307na250q9mub",
     "https://us-west-2.graphassets.com/cmkc1ejod2bpe07lper075xkw/output=format:jpg/cmkdhltz0yv0o07mufp1hyqsb",
     "https://us-west-2.graphassets.com/cmkc1ejod2bpe07lper075xkw/output=format:jpg/cmkdhltwiyv0h07muazoofn0m",
     "https://us-west-2.graphassets.com/cmkc1ejod2bpe07lper075xkw/output=format:jpg/cmkdhlttcyxww07nag3tvfudb",
-    "https://us-west-2.graphassets.com/cmkc1ejod2bpe07lper075xkw/output=format:jpg/cmkdhltppyv0007muxvyi90z8",
     "https://us-west-2.graphassets.com/cmkc1ejod2bpe07lper075xkw/output=format:jpg/cmkdhltppyv0007muxvyi90z8",
     "https://us-west-2.graphassets.com/cmkc1ejod2bpe07lper075xkw/output=format:jpg/cmkdhltimyuzs07mupt0gl076",
   ],
@@ -303,33 +299,7 @@ export const EscolaDivaPortelaProject: ProjetoEngenharia = {
   ],
 };
 
-export const MCMVProject: ProjetoEngenharia = {
-  id: "prj_mcmv_07",
-  categoria: "Residencial",
-  titulo: "Minha Casa Minha Vida",
-  descricao:
-    "Empreendimento habitacional voltado à moradia popular, com infraestrutura urbana e áreas de convivência.",
-  descricaoCompleta:
-    "Inaugurada em 2018 para substituir a antiga sede histórica da Cidade Baixa, esta unidade opera em uma nova estrutura de ponta próxima à BR-324. O hospital funciona através de uma Parceria Público-Privada e oferece instalações tecnológicas avançadas, desenhadas especificamente para garantir o isolamento adequado e o tratamento seguro de pacientes em uma localização de fácil acesso rodoviário.",
-  status: "Concluído",
-  relevancia: 2.5,
-  cliente: "Caixa Econômica Federal",
-  localizacao: "Zona Norte, Feira de Santana - BA",
-  periodo: {
-    duracao: "18 meses",
-    conclusao: "2024-06",
-  },
-  imagens: [
-    "https://us-west-2.graphassets.com/cmkc1ejod2bpe07lper075xkw/output=format:jpg/cmkdhlvglyxyu07nankeqir3x",
-  ],
-  especificacoes: {
-    "Unidades Habitacionais": 400,
-    "Área Construída": "18.500 m²",
-    "Área do Terreno": "55.000 m²",
-    "Área Pavimentada": "12.000 m²",
-  },
-  itensInclusos: ["Parque infantil", "Associação dos moradores"],
-};
+
 
 export const ViaBarradaoProject: ProjetoEngenharia = {
   id: "prj_via_barradao_08",
@@ -372,7 +342,6 @@ export const allProjects: ProjetoEngenharia[] = [
   EdificioGaragemProject,
   CleristonAndradeProject,
   EscolaDivaPortelaProject,
-  MCMVProject,
   ViaBarradaoProject,
 ];
 
