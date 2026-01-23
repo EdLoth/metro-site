@@ -15,26 +15,38 @@ import { ScrollController } from "./components/ScrollController";
 import ProjectDetailNew from "./pages/ProjectDetailNew";
 import ProjectsNew from "./pages/ProjectsNew";
 
-const queryClient = new QueryClient();
+// Configuração do cliente de busca (React Query)
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      refetchOnWindowFocus: false,
+      retry: false,
+    },
+  },
+});
 
 const App = () => {
   return (
     <QueryClientProvider client={queryClient}>
       <LanguageProvider>
         <TooltipProvider>
+          {/* Componentes de Notificação Globais */}
           <Toaster />
           <Sonner />
 
           <BrowserRouter>
-            {/* agora está dentro do Router => funciona */}
+            {/* O ScrollController garante que o usuário comece no topo ao mudar de rota */}
             <ScrollController />
 
             <Routes>
               <Route path="/" element={<Index />} />
               <Route path="/institucional" element={<Institucional />} />
               <Route path="/equipe" element={<Equipe />} />
+              
               <Route path="/projetos" element={<Projects />} />
               <Route path="/projetos2" element={<ProjectsNew />} />
+              
+              {/* Detalhes do Projeto */}
               <Route path="/projeto/:id" element={<ProjectDetail />} />
               <Route path="/projeto2/:id" element={<ProjectDetailNew />} />
 
