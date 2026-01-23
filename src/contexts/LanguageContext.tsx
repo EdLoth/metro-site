@@ -142,7 +142,7 @@ const translations = {
     // Institutional Page
     "institutional.title": "Sobre a Metro Engenharia",
     "institutional.subtitle":
-      "Mais de 30 anos de experiência construindo sonhos e transformando cidades",
+      "Mais de 20 anos de experiência construindo sonhos e transformando cidades",
     "institutional.historyTitle": "Nossa História",
     "institutional.historyP1":
       "Com sede em Salvador, Bahia, a Metro Engenharia e Consultoria Ltda  se destaca como uma empresa comprometida com soluções eficientes ,modernas  e sustentáveis no setor da engenharia. Nosso compromisso vai além da entrega dos empreendimentos realizados  aos nossos clientes, buscamos agregar valor, confiança e impacto positivo em cada obra que realizamos.",

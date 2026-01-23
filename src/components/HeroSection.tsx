@@ -15,14 +15,8 @@ const HeroSection = () => {
 
   const stats = [
     { key: "projects", end: 150, suffix: "+", label: "Obras Finalizadas" },
-    { key: "years", end: 20, suffix: "", label: "Anos no Mercado" },
-    { key: "employees", end: 200, suffix: "+", label: "Funcionários" },
-    {
-      key: "satisfaction",
-      end: 98,
-      suffix: "%",
-      label: "Satisfação dos Clientes",
-    },
+    { key: "years", end: 20, suffix: "+", label: "Anos no Mercado" },
+    
   ];
 
   useEffect(() => {
@@ -103,7 +97,7 @@ const HeroSection = () => {
         </div>
 
         {/* Statistics Counters */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 mt-16 max-w-4xl mx-auto">
+        <div className="grid grid-cols-2 md:grid-cols-2 gap-4 md:gap-6 mt-16 max-w-2xl mx-auto">
           {stats.map((stat, index) => (
             <div
               key={stat.key}

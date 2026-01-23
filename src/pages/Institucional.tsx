@@ -108,23 +108,16 @@ const Institucional = () => {
           <h2 className="text-4xl font-bold mb-16 text-center">
             {t("institutional.numbersTitle")}
           </h2>
-          <div className="grid md:grid-cols-4 gap-8 max-w-5xl mx-auto text-center">
+          <div className="grid md:grid-cols-2 gap-1 max-w-[650px] mx-auto text-center">
             <div>
-              <div className="text-5xl font-bold mb-2">30+</div>
+              <div className="text-5xl font-bold mb-2">20+</div>
               <div className="text-lg text-primary-foreground/80">{t("institutional.yearsExperience")}</div>
             </div>
             <div>
               <div className="text-5xl font-bold mb-2">500+</div>
               <div className="text-lg text-primary-foreground/80">{t("institutional.projects")}</div>
             </div>
-            <div>
-              <div className="text-5xl font-bold mb-2">150+</div>
-              <div className="text-lg text-primary-foreground/80">{t("team.collaborators")}</div>
-            </div>
-            <div>
-              <div className="text-5xl font-bold mb-2">98%</div>
-              <div className="text-lg text-primary-foreground/80">{t("institutional.clients")}</div>
-            </div>
+           
           </div>
         </div>
       </section>

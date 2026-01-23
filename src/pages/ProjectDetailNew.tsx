@@ -26,22 +26,24 @@ import {
   ChevronLeft,
   ChevronRight,
   Maximize2,
-  X
+  X,
+  Wrench,
+  Truck
 } from "lucide-react";
 import { getProjectById } from "@/data/projects";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { ProjetoEngenharia } from "@/projects";
 
 const categoryIcons: Record<string, React.ElementType> = {
-  Hospitalar: Hospital,
-  Infraestrutura: TrafficCone,
-  Educacional: GraduationCap,
-  Residencial: Home,
+ Infraestrutura: TrafficCone,
   Construção: HardHat,
   Urbanização: Trees,
   Saneamento: Droplet,
-  Estradas: Route,
-  "Reformas e Revitalizações": PaintRoller,
+  Reformas: PaintRoller,
+  Habitação: Home,
+  Manutenção: Wrench,
+  Pavimentação: Route,
+  Abasteciemto: Truck,
 };
 
 const ProjectDetailNew = () => {
@@ -146,10 +148,7 @@ const ProjectDetailNew = () => {
               <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">{project.titulo}</h1>
               <p className="text-xl text-white/90 max-w-4xl">{project.descricao}</p>
             </div>
-            <Badge className={`${statusColors[projectStatusKey]} text-md px-4 py-2 h-fit`}>
-              {project.status === "Concluído" ? <CheckCircle2 className="w-4 h-4 mr-2" /> : <ClockIcon className="w-4 h-4 mr-2" />}
-              {project.status}
-            </Badge>
+           
           </div>
         </div>
       </section>
@@ -159,7 +158,7 @@ const ProjectDetailNew = () => {
           <div className="grid lg:grid-cols-12 gap-10">
             
             {/* CARROSSEL PRINCIPAL */}
-            <div className="lg:col-span-7">
+            <div className="lg:col-span-8">
               <div 
                 className="relative aspect-video rounded-2xl overflow-hidden bg-black shadow-2xl group cursor-zoom-in"
                 onClick={() => setIsModalOpen(true)}
@@ -222,7 +221,7 @@ const ProjectDetailNew = () => {
             </div>
 
             {/* FICHA TÉCNICA */}
-            <div className="lg:col-span-5">
+            <div className="lg:col-span-4">
               <Card className="shadow-xl border-primary/5">
                 <div className="bg-primary/5 p-5 border-b">
                   <h2 className="text-xl font-bold flex items-center gap-2">
@@ -268,7 +267,7 @@ const ProjectDetailNew = () => {
 
           <div className="mt-16">
             <h2 className="text-3xl font-bold mb-8 flex items-center gap-4">
-              <div className="h-10 w-2 bg-primary rounded-full" /> Memorial Descritivo
+              <div className="h-10 w-2 bg-primary rounded-full" /> Sobre o projeto
             </h2>
             <Card className="bg-slate-50 dark:bg-slate-900/50 border-none shadow-inner">
               <CardContent className="p-8 md:p-12">

@@ -10,53 +10,51 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import allProjects from "@/projects";
 import {
   Filter,
-  Hospital,
   TrafficCone,
-  GraduationCap,
   Home,
   HardHat,
   Trees,
   Droplet,
   Route,
-  PaintRoller,
   LayoutGrid,
   CheckCircle2,
   Clock,
-  MapPin,
-  Maximize2,
-  ArrowRight,
+  Wrench,
+  Truck,
+  PaintRoller,
   SearchX,
+  MapPin,
 } from "lucide-react";
 
 const categoryIcons: Record<string, React.ElementType> = {
-  Hospitalar: Hospital,
   Infraestrutura: TrafficCone,
-  Educacional: GraduationCap,
-  Residencial: Home,
   Construção: HardHat,
   Urbanização: Trees,
   Saneamento: Droplet,
-  Estradas: Route,
-  "Reformas e Revitalizações": PaintRoller,
+  Reformas: PaintRoller,
+  habitação: Home,
+  Manutenção: Wrench,
+  Pavimentação: Route,
+  Abasteciemto: Truck,
 };
 
 const ProjectsNew = () => {
   const { t } = useLanguage();
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
   const [selectedStatus, setSelectedStatus] = useState<string>("all");
-  const [isFiltersOpen, setIsFiltersOpen] = useState(false);
+  const [isFiltersOpen, setIsFiltersOpen] = useState(true);
 
   const categories = [
     { id: "all", label: "Todos os Setores", icon: LayoutGrid },
-    { id: "Hospitalar", label: "Hospitalar", icon: Hospital },
     { id: "Infraestrutura", label: "Infraestrutura", icon: TrafficCone },
-    { id: "Educacional", label: "Educacional", icon: GraduationCap },
-    { id: "Residencial", label: "Residencial", icon: Home },
     { id: "Construção", label: "Construção", icon: HardHat },
     { id: "Urbanização", label: "Urbanização", icon: Trees },
     { id: "Saneamento", label: "Saneamento", icon: Droplet },
-    { id: "Estradas", label: "Estradas", icon: Route },
-    { id: "Reformas e Revitalizações", label: "Reformas", icon: PaintRoller },
+    { id: "Reformas", label: "Reformas", icon: PaintRoller },
+    { id: "habitação", label: "Habitação", icon: Home },
+    { id: "Manutenção", label: "Manutenção", icon: Wrench },
+    { id: "Pavimentação", label: "Pavimentação", icon: Route },
+    { id: "Abasteciemto", label: "Abastecimento", icon: Truck },
   ];
 
   const statuses = [
@@ -65,42 +63,37 @@ const ProjectsNew = () => {
     { value: "Em andamento", label: "Em Andamento", icon: Clock },
   ];
 
+  // LÓGICA DE FILTRO E ORDENAÇÃO POR RELEVÂNCIA
   const filteredProjects = useMemo(() => {
-    return allProjects.filter((project) => {
-      const categoryMatch =
-        selectedCategory === "all" || project.categoria === selectedCategory;
-      const statusMatch =
-        selectedStatus === "all" || project.status === selectedStatus;
-      return categoryMatch && statusMatch;
-    });
-  }, [selectedCategory, selectedStatus]);
+    return allProjects
+      .filter((project) => {
+        const categoryMatch =
+          selectedCategory === "all" || 
+          project.categoria.trim().toLowerCase() === selectedCategory.trim().toLowerCase();
+        
+        const statusMatch =
+          selectedStatus === "all" || 
+          project.status.trim().toLowerCase() === selectedStatus.trim().toLowerCase();
 
-  const statusColors: Record<string, string> = {
-    Concluído:
-      "bg-emerald-500/10 text-emerald-600 border-emerald-200 dark:border-emerald-900",
-    "Em andamento":
-      "bg-amber-500/10 text-amber-600 border-amber-200 dark:border-amber-900",
-  };
+        return categoryMatch && statusMatch;
+      })
+      // Ordenação por relevância: 5 para o topo, 1 para o final
+      .sort((a, b) => (b.relevancia || 0) - (a.relevancia || 0));
+  }, [selectedCategory, selectedStatus]);
 
   return (
     <div className="min-h-screen bg-[#F8FAFC] dark:bg-slate-950">
       <Navigation />
 
-      {/* Hero Section */}
       <section className="pt-20 pb-12 bg-gradient-to-br from-primary to-primary-dark text-primary-foreground">
         <div className="container mx-auto px-4 text-center">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4">
-            {t("projects.title")}
-          </h1>
+          <h1 className="text-4xl md:text-5xl font-bold mb-4">{t("projects.title")}</h1>
           <p className="text-lg text-primary-foreground/90 max-w-2xl mx-auto">
-            Explore nossa trajetória através de projetos que unem precisão
-            técnica, inovação sustentável e compromisso com o futuro das
-            cidades.
+            Portfólio técnico especializado em soluções de engenharia e infraestrutura.
           </p>
         </div>
       </section>
 
-      {/* Sticky Filter System */}
       <section className="sticky top-24 z-40 bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl border-b border-slate-200 dark:border-slate-800 shadow-sm">
         <div className="container mx-auto px-4 py-4">
           <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
@@ -112,17 +105,12 @@ const ProjectsNew = () => {
               >
                 <Filter className="w-4 h-4" />
                 {isFiltersOpen ? "Ocultar Filtros" : "Mostrar Filtros"}
-                {selectedCategory !== "all" && (
-                  <span className="ml-1 flex h-2 w-2 rounded-full bg-primary"></span>
+                {(selectedCategory !== "all" || selectedStatus !== "all") && (
+                  <span className="ml-1 flex h-2 w-2 rounded-full bg-primary animate-pulse"></span>
                 )}
               </Button>
-              <div className="h-6 w-[1px] bg-slate-200 dark:bg-slate-700 hidden lg:block" />
               <p className="text-sm text-slate-500 font-medium">
-                Exibindo{" "}
-                <span className="text-foreground font-bold">
-                  {filteredProjects.length}
-                </span>{" "}
-                resultados
+                Encontrados: <span className="text-foreground font-bold">{filteredProjects.length}</span>
               </p>
             </div>
 
@@ -131,9 +119,9 @@ const ProjectsNew = () => {
                 <button
                   key={s.value}
                   onClick={() => setSelectedStatus(s.value)}
-                  className={`px-4 py-2 rounded-full text-xs font-bold transition-all border ${
+                  className={`px-4 py-2 rounded-full text-[10px] font-bold uppercase transition-all border ${
                     selectedStatus === s.value
-                      ? "bg-slate-900 text-white border-slate-900 dark:bg-white dark:text-slate-900"
+                      ? "bg-primary text-white border-primary"
                       : "bg-transparent text-slate-500 border-slate-200 hover:border-slate-400"
                   }`}
                 >
@@ -161,24 +149,14 @@ const ProjectsNew = () => {
                         onClick={() => setSelectedCategory(cat.id)}
                         className={`group p-4 rounded-xl border flex flex-col items-center gap-3 transition-all duration-300 ${
                           isActive
-                            ? "bg-primary border-primary shadow-lg shadow-primary/20 scale-[1.02]"
+                            ? "bg-primary border-primary shadow-lg shadow-primary/20"
                             : "bg-white dark:bg-slate-800 border-slate-100 dark:border-slate-700 hover:border-primary/50"
                         }`}
                       >
-                        <div
-                          className={`p-3 rounded-lg transition-colors ${
-                            isActive
-                              ? "bg-white/20 text-white"
-                              : "bg-slate-50 dark:bg-slate-900 text-slate-400 group-hover:text-primary"
-                          }`}
-                        >
-                          <Icon className="w-6 h-6" />
+                        <div className={`p-3 rounded-lg ${isActive ? "bg-white/20 text-white" : "bg-slate-50 dark:bg-slate-900 text-slate-400 group-hover:text-primary"}`}>
+                          <Icon className="w-5 h-5" />
                         </div>
-                        <span
-                          className={`text-xs font-bold uppercase tracking-wider ${
-                            isActive ? "text-white" : "text-slate-500"
-                          }`}
-                        >
+                        <span className={`text-[10px] font-bold uppercase tracking-wider ${isActive ? "text-white" : "text-slate-500"}`}>
                           {cat.label}
                         </span>
                       </button>
@@ -191,63 +169,70 @@ const ProjectsNew = () => {
         </div>
       </section>
 
-      {/* Projects Grid */}
-      <section className="py-12 bg-muted/30">
+      <section className="py-12 min-h-[400px]">
         <div className="container mx-auto px-4">
           {filteredProjects.length === 0 ? (
-            <div className="text-center py-20">
-              <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-muted mb-4">
-                <Filter className="w-8 h-8 text-muted-foreground/50" />
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="flex flex-col items-center justify-center py-20 text-center"
+            >
+              <div className="bg-slate-100 dark:bg-slate-900 p-8 rounded-full mb-6">
+                <SearchX className="w-16 h-16 text-slate-300" />
               </div>
-              <h3 className="text-xl font-bold text-foreground">
-                Nenhum projeto encontrado
-              </h3>
-              <p className="text-muted-foreground mt-2">
-                Não há projetos com a combinação de filtros atual.
+              <h3 className="text-2xl font-bold text-foreground">Nenhum projeto encontrado</h3>
+              <p className="text-slate-500 max-w-sm mt-2">
+                Não existem projetos cadastrados para a categoria selecionada neste momento.
               </p>
-            </div>
+              <Button 
+                variant="link" 
+                onClick={() => {setSelectedCategory("all"); setSelectedStatus("all");}}
+                className="mt-4 text-primary font-bold"
+              >
+                Limpar todos os filtros
+              </Button>
+            </motion.div>
           ) : (
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
               {filteredProjects.map((project) => {
                 const CategoryIcon = categoryIcons[project.categoria];
                 return (
-                  <Link
+                  <motion.div
+                    layout
                     key={project.id}
-                    to={`/projeto/${project.id}`}
-                    className="group h-full block"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
                   >
-                    <Card className="overflow-hidden hover:shadow-xl transition-all duration-300 h-full flex flex-col border-border bg-card">
-                      <div className="relative h-60 overflow-hidden">
-                        <img
-                          src={project.imagens[0]}
-                          alt={project.titulo}
-                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                        />
-                        <div className="absolute top-3 left-3">
-                          <Badge className="bg-background/95 text-foreground hover:bg-background shadow-sm backdrop-blur flex items-center gap-1.5">
-                            {CategoryIcon && (
-                              <CategoryIcon className="w-3 h-3 text-primary" />
-                            )}
-                            {project.categoria}
-                          </Badge>
+                    <Link to={`/projeto/${project.id}`} className="group h-full block">
+                      <Card className="overflow-hidden hover:shadow-xl transition-all duration-300 h-full flex flex-col border-border bg-card">
+                        <div className="relative h-60 overflow-hidden">
+                          <img
+                            src={project.imagens[0]}
+                            alt={project.titulo}
+                            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                          />
+                          <div className="absolute top-3 left-3">
+                            <Badge className="bg-background/95 text-foreground shadow-sm backdrop-blur flex items-center gap-1.5">
+                              {CategoryIcon && <CategoryIcon className="w-3 h-3 text-primary" />}
+                              {project.categoria}
+                            </Badge>
+                          </div>
                         </div>
-                     
-                      </div>
-                      <CardContent className="p-5 flex-1 flex flex-col">
-                        <h3 className="text-lg font-bold mb-2 group-hover:text-primary transition-colors line-clamp-1">
-                          {project.titulo}
-                        </h3>
-                        <p className="text-muted-foreground text-sm line-clamp-2 mb-4 flex-1">
-                          {project.descricao}
-                        </p>
-
-                        <div className="flex items-center justify-between text-xs text-muted-foreground pt-4 border-t border-border/50">
-                          <span>{project.localizacao.split(",")[0]}</span>
-                          <span>{project.especificacoes.areaConstruida}</span>
-                        </div>
-                      </CardContent>
-                    </Card>
-                  </Link>
+                        <CardContent className="p-5 flex-1 flex flex-col">
+                          <h3 className="text-lg font-bold mb-2 group-hover:text-primary transition-colors line-clamp-2">
+                            {project.titulo}
+                          </h3>
+                          <p className="text-muted-foreground text-sm line-clamp-2 mb-6 flex-1">
+                            {project.descricao}
+                          </p>
+                          <div className="flex items-center justify-between text-[10px] font-bold text-muted-foreground pt-4 border-t border-border/50 uppercase tracking-tighter">
+                            <span className="flex items-center gap-2"><MapPin className="w-3 h-3" />{project.localizacao.split(",")[0]}</span>
+                          </div>
+                        </CardContent>
+                      </Card>
+                    </Link>
+                  </motion.div>
                 );
               })}
             </div>

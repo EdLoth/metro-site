@@ -121,15 +121,15 @@ export default function Footer() {
             <ul className="space-y-2 text-white/85">
               <li className="flex items-center gap-2">
                 <Phone className="h-5 w-5 text-white" />
-                <span>(11) 3456-7890</span>
+                <span>(71) 3343-4300</span>
               </li>
               <li className="flex items-center gap-2">
                 <Mail className="h-5 w-5 text-white" />
                 <a
-                  href="mailto:contato@metroengenharia.com.br"
+                  href="mailto:metroengenharia@metroec.com.br"
                   className="hover:underline transition-all"
                 >
-                  contato@metroengenharia.com.br
+                  metroengenharia@metroec.com.br
                 </a>
               </li>
               <li className="text-white/80">Propostas e novas parcerias</li>
@@ -168,8 +168,8 @@ export default function Footer() {
             <div className="mt-6">
               <div className="font-semibold mb-3">{t("footer.social")}</div>
               <div className="flex gap-4 flex-wrap">
-                <SocialLink href="#" label="LinkedIn" Icon={Linkedin} />
-                <SocialLink href="#" label="Instagram" Icon={Instagram} />
+                <SocialLink href="https://www.instagram.com/metroengenharia.ba/" label="LinkedIn" Icon={Linkedin} />
+                <SocialLink href="https://www.linkedin.com/company/metroec-engenharia" label="Instagram" Icon={Instagram} />
               </div>
             </div>
           </motion.div>
