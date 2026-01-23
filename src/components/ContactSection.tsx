@@ -173,34 +173,28 @@ export default function ContactSection() {
               América, Salvador
             </div>
             <div className="flex items-center gap-2">
-              <Phone className="w-4 h-4" /> (71) 3333-0000
+              <Phone className="w-4 h-4" /> (71) 3343-4300
             </div>
             <div className="flex items-center gap-2">
-              <Mail className="w-4 h-4" /> contato@metroengenharia.com
+              <Mail className="w-4 h-4" /> metroengenharia@metroec.com.br
             </div>
 
             <div className="mt-3 flex gap-3">
               <a
-                href="#"
+                href="https://www.linkedin.com/company/metroec-engenharia"
                 aria-label="LinkedIn"
                 className="hover:text-pink-400 transition"
               >
                 <Linkedin className="w-5 h-5" />
               </a>
               <a
-                href="#"
+                href="https://www.instagram.com/metroengenharia.ba/"
                 aria-label="Instagram"
                 className="hover:text-pink-400 transition"
               >
                 <Instagram className="w-5 h-5" />
               </a>
-              <a
-                href="#"
-                aria-label="Facebook"
-                className="hover:text-pink-400 transition"
-              >
-                <Facebook className="w-5 h-5" />
-              </a>
+            
             </div>
           </motion.div>
         </div>
