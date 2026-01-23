@@ -5,9 +5,9 @@ import {
   Mail,
   Phone,
   MapPin,
-  Navigation,
+  Navigation as NavIcon,
 } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useLanguage } from "@/contexts/LanguageContext";
 import logoLight from "@/assets/logo-light.png";
 
@@ -48,20 +48,53 @@ function SocialLink({
   );
 }
 
-const enderecoTexto = "Alameda Salvador, 1057, Ed. Salvador Shopping Business, Torre América – Sala 1516, Caminho das Árvores – Salvador, Ba. CEP 41.820-7910";
+const enderecoTexto =
+  "Alameda Salvador, 1057, Ed. Salvador Shopping Business, Torre América – Sala 1516, Caminho das Árvores – Salvador, Ba. CEP 41.820-7910";
 const enderecoEncoded = encodeURIComponent(enderecoTexto);
 const mapsEmbedSrc = `https://www.google.com/maps?hl=pt-BR&q=${enderecoEncoded}&t=m&z=16&output=embed`;
 const mapsLink = `https://www.google.com/maps/search/?api=1&query=${enderecoEncoded}`;
 
-const scrollToSection = (id: string) => {
-  const element = document.getElementById(id);
-  if (element) {
-    element.scrollIntoView({ behavior: "smooth" });
-  }
-};
-
 export default function Footer() {
   const { t } = useLanguage();
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  /** -------------------------------------------
+   * SCROLL INTELIGENTE REPLICADO DO HEADER
+   * --------------------------------------------
+   */
+  const scrollToSection = (id: string) => {
+    const go = () => {
+      const element = document.getElementById(id);
+      if (element) {
+        const y =
+          element.getBoundingClientRect().top + window.pageYOffset - 100;
+        window.scrollTo({ top: y, behavior: "smooth" });
+      }
+    };
+
+    if (location.pathname === "/") {
+      // já está na home → só rolar
+      go();
+    } else {
+      // não está na home → navegar para home e depois rolar
+      navigate("/");
+      setTimeout(go, 300);
+    }
+  };
+
+  /** -------------------------------------------
+   * BOTÃO PROJETOS (regra especial replicada)
+   * --------------------------------------------
+   */
+  const handleProjetos = () => {
+    if (location.pathname === "/") {
+      scrollToSection("projetos");
+    } else {
+      navigate("/projetos");
+    }
+  };
+
   return (
     <footer className="relative text-white overflow-hidden bg-gradient-to-br from-[#111a2b] via-[#15243b] to-[#18233d]">
       {/* brilho sutil */}
@@ -81,8 +114,14 @@ export default function Footer() {
             viewport={{ once: true, amount: 0.3 }}
             className="space-y-3"
           >
-            <img src={logoLight} className="w-44 mb-4" alt="Metro Engenharia" />
-            
+            <Link to="/" className="flex items-center gap-2">
+              <img
+                src={logoLight}
+                className="w-44 mb-4"
+                alt="Metro Engenharia"
+              />
+            </Link>
+
             <p className="text-white/80 leading-relaxed max-w-lg">
               {t("footer.description")}
             </p>
@@ -100,7 +139,7 @@ export default function Footer() {
                       rel="noopener noreferrer"
                       className="inline-flex items-center gap-1 text-white hover:opacity-90 transition-opacity"
                     >
-                      <Navigation className="h-4 w-4" />
+                      <NavIcon className="h-4 w-4" />
                       {t("footer.viewMap")}
                     </a>
                   </div>
@@ -141,23 +180,31 @@ export default function Footer() {
                 <li>
                   <button
                     onClick={() => scrollToSection("servicos")}
-                    className="hover:text-white transition-all"
+                    className="hover:text-white transition-all text-left"
                   >
-                    {t("footer.services")}
+                    {t("nav.services")}
                   </button>
                 </li>
                 <li>
                   <button
-                    onClick={() => scrollToSection("projetos")}
-                    className="hover:text-white transition-all"
+                    onClick={handleProjetos}
+                    className="hover:text-white transition-all text-left"
                   >
                     {t("nav.projects")}
                   </button>
                 </li>
                 <li>
+                  <button
+                    onClick={() => scrollToSection("areas")}
+                    className="hover:text-white transition-all text-left"
+                  >
+                    {t("nav.areas")}
+                  </button>
+                </li>
+                <li>
                   <Link
                     to="/institucional"
-                    className="hover:text-white transition-all"
+                    className="hover:text-white transition-all block"
                   >
                     {t("nav.institutional")}
                   </Link>
@@ -168,8 +215,16 @@ export default function Footer() {
             <div className="mt-6">
               <div className="font-semibold mb-3">{t("footer.social")}</div>
               <div className="flex gap-4 flex-wrap">
-                <SocialLink href="https://www.instagram.com/metroengenharia.ba/" label="LinkedIn" Icon={Linkedin} />
-                <SocialLink href="https://www.linkedin.com/company/metroec-engenharia" label="Instagram" Icon={Instagram} />
+                <SocialLink
+                  href="https://www.linkedin.com/company/metroec-engenharia"
+                  label="LinkedIn"
+                  Icon={Linkedin}
+                />
+                <SocialLink
+                  href="https://www.instagram.com/metroengenharia.ba/"
+                  label="Instagram"
+                  Icon={Instagram}
+                />
               </div>
             </div>
           </motion.div>
@@ -210,9 +265,7 @@ export default function Footer() {
           <span className="text-white font-semibold tracking-wide">
             © {new Date().getFullYear()} Metro Engenharia
           </span>
-            <span className="text-white/80">
-              {t("footer.rights")}
-            </span>
+          <span className="text-white/80">{t("footer.rights")}</span>
         </div>
       </motion.div>
     </footer>
