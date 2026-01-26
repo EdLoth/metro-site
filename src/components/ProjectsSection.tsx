@@ -89,12 +89,7 @@ const ProjectsSection = () => {
                      </Badge>
                   </div>
 
-                  {/* Badge Status (Direita) */}
-                  <div className="absolute top-4 right-4">
-                     <Badge className={`${statusColors[project.status] || "bg-gray-100 text-gray-800"} shadow-sm`}>
-                        {project.status}
-                     </Badge>
-                  </div>
+               
                 </div>
 
                 <CardContent className="p-6 flex-1 flex flex-col">

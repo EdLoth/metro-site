@@ -77,6 +77,10 @@ const translations = {
     "icom.systemsDesc":
       "Implantação de redes de gases medicinais, climatização, tratamento de ar e sistemas essenciais para ambientes clínicos.",
 
+    // ICOM Section
+    "cc.title": "Centro de Convenções de Feira de Snatana",
+    "cc.subtitle": "Projeto de centro de convenções destinado à realização de eventos, o complexo é dividido em dois prédios principais interligados.",
+
     // Projects Section
     "projects.title": "Projetos Executados",
     "projects.subtitle":

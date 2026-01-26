@@ -182,17 +182,16 @@ const ProjectDetail = () => {
           </Link>
           <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-6">
             <div>
-              <Badge className="bg-white text-foreground mb-4 px-3 py-1 flex w-fit items-center gap-2 hover:bg-gray-100">
-                <CategoryIcon className="w-4 h-4 text-primary" />
-                {project.categoria}
-              </Badge>
+              
               <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">{project.titulo}</h1>
               <p className="text-xl text-muted-white max-w-3xl">{project.descricao}</p>
             </div>
-            <Badge className={`${statusColors[projectStatusKey]} text-lg px-6 py-2 whitespace-nowrap`}>
-              {project.status === "Concluído" ? <CheckCircle2 className="mr-2" /> : <ClockIcon className="mr-2" />}
-              {project.status}
-            </Badge>
+
+            <Badge className="bg-white text-lg px-6 py-2 whitespace-nowrap text-foreground mb-4 flex w-fit items-center gap-2 hover:bg-gray-100">
+                <CategoryIcon className="w-4 h-4 text-primary" />
+                {project.categoria}
+              </Badge>
+
           </div>
         </div>
       </section>

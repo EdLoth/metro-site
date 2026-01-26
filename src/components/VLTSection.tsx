@@ -145,6 +145,61 @@ export default function FullProjectSections() {
           </p>
         </motion.div>
       </motion.div>
+
+        {/* SECTION 1: ICOM */}
+      <motion.div
+        layout
+        onClick={() => navigate("/projetos")}
+        className="
+          group
+          relative
+          /* min-h garante que a altura apareça mesmo sob pressão do flexbox */
+          min-h-[300px] md:min-h-[350px] lg:min-h-full
+          flex-1
+          bg-[#0a0a0a]
+          flex items-center justify-center
+          overflow-hidden
+          px-6 cursor-pointer
+        "
+        variants={sideVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+        whileHover={typeof window !== 'undefined' && window.innerWidth >= 1024 ? {
+          flexGrow: 1.4,
+          transition: { duration: 0.5 },
+        } : {}}
+      >
+        <div className="absolute inset-0 pointer-events-none">
+          <img
+            src="/cc.jpg"
+            className="w-full h-full object-cover opacity-60 transition-opacity duration-500 group-hover:opacity-30"
+            alt="Centro de Convenções de Feira de Santana"
+          />
+          <video
+            src="/hero.mp4"
+            className="absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+            autoPlay muted loop playsInline
+          />
+        </div>
+
+        <div className="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-colors pointer-events-none" />
+
+        <motion.div
+          className="relative z-10 flex flex-col items-center text-center gap-3"
+          variants={contentVariants}
+        >
+          <div className="p-3 bg-white/10 backdrop-blur-md rounded-full">
+            <Hospital className="h-8 w-8 text-white" />
+          </div>
+          <h3 className="text-xl md:text-2xl lg:text-3xl text-white font-bold leading-tight">
+            {t("cc.title")}
+          </h3>
+          <p className="hidden lg:block text-white/80 text-base max-w-sm">
+            {t("cc.subtitle")}
+          </p>
+        </motion.div>
+      </motion.div>
     </motion.section>
   );
 }
