@@ -22,7 +22,7 @@ export const categoriaIcons: Record<
   "Urbanização": Trees,
   "Saneamento": Droplet,
   "Reformas": PaintRoller,
-  "habitação": Home,
+  "Habitação": Home,
   "Manutenção": Wrench,
   "Pavimentação": Route,
   "Abasteciemto": Truck,
@@ -36,7 +36,7 @@ export type ProjetoEngenharia = {
     | "Urbanização"
     | "Saneamento"
     | "Reformas"
-    | "habitação"
+    | "Habitação"
     | "Manutenção"
     | "Pavimentação"
     | "Abasteciemto";
@@ -69,7 +69,7 @@ export const ICOMProject: ProjetoEngenharia = {
   descricao:
     "Unidade de referência da Bahia especializada exclusivamente no tratamento de doenças transmissíveis de alta complexidade.",
   descricaoCompleta:
-    "O Instituto Couto Maia (Icom) Localizado em Cajazeiras e inaugurado em julho de 2018, a unidade é referência em infectologia no Brasil. Com infraestrutura de ponta, inclui leitos de UTI e diagnósticos avançados por imagem. Sua construção levou 26 meses, divididos entre uma fase inicial acelerada de fundação e estrutura (10 meses) e uma etapa minuciosa de acabamento, climatização e montagem de suporte médico especializado (16 meses)",
+    "O Instituto Couto Maia (Icom) Localizado em Cajazeiras e inaugurado em julho de 2018, a unidade é referência em infectologia no Brasil. Com infraestrutura de ponta, inclui leitos de UTI e diagnósticos avançados por imagem.",
 
   status: "Concluído",
   relevancia: 5.0,
@@ -191,7 +191,7 @@ export const EdificioGaragemProject: ProjetoEngenharia = {
   descricao:
     "Edifício destinado ao estacionamento vertical, projetado para atender demandas urbanas e institucionais.",
   descricaoCompleta:
-    "Edifício destinado ao estacionamento vertical, projetado para atender demandas urbanas e institucionais.",
+    "O Edifício Garagem integra o moderno Complexo Educacional da cidade, localizado no centro de Feira de Santana. Com aproximadamente 6.000 m² de área construída distribuídos em 7 pavimentos, a obra foi planejada para otimizar o fluxo urbano e oferecer infraestrutura de suporte à nova sede da Secretaria de Educação. O edifício dispõe de 453 vagas equipadas com um sistema inteligente de monitoramento eletrônico, priorizando a acessibilidade total com andares dedicados e elevadores de alta capacidade, consolidando-se como uma solução logística essencial para a mobilidade da região.",
   status: "Concluído",
   relevancia: 3.7,
   cliente:
@@ -215,7 +215,7 @@ export const EdificioGaragemProject: ProjetoEngenharia = {
   ],
   especificacoes: {
     "Área Construída":
-      "Aproximadamente 11178,00 m² - integrado ao complexo da nova sede da Secretaria Municipal de Educação.",
+      "6000,00 m²",
     "N° de Vagas":
       "453 vagas no total sendo 411 para carros e 42 para motocicletas.",
     "Quantidade de Pavimentos": 7,
@@ -412,13 +412,11 @@ export const ViaBarradaoProject: ProjetoEngenharia = {
     "https://us-west-2.graphassets.com/cmkc1ejod2bpe07lper075xkw/output=format:jpg/cmkdhztk7yyef07muqmlcb96o",
     "https://us-west-2.graphassets.com/cmkc1ejod2bpe07lper075xkw/output=format:jpg/cmkdhztq7z16e07naxjj2sgm1",
     "https://us-west-2.graphassets.com/cmkc1ejod2bpe07lper075xkw/output=format:jpg/cmkdhzttpyyf207mudisb1ikz",
-    "https://us-west-2.graphassets.com/cmkc1ejod2bpe07lper075xkw/output=format:jpg/cmkdhzttpyyf207mudisb1ikz",
-    "https://us-west-2.graphassets.com/cmkc1ejod2bpe07lper075xkw/output=format:jpg/cmkdhzttpyyf207mudisb1ikz",
     "https://us-west-2.graphassets.com/cmkc1ejod2bpe07lper075xkw/output=format:jpg/cmkdhzu6oz17i07nahicxye78",
-    "https://us-west-2.graphassets.com/cmkc1ejod2bpe07lper075xkw/output=format:jpg/cmkdhzu6oz17i07nahicxye78",
-    "https://us-west-2.graphassets.com/cmkc1ejod2bpe07lper075xkw/output=format:jpg/cmkdhzu6oz17i07nahicxye78",
-    "https://us-west-2.graphassets.com/cmkc1ejod2bpe07lper075xkw/output=format:jpg/cmkdhzu6oz17i07nahicxye78",
-    "https://us-west-2.graphassets.com/cmkc1ejod2bpe07lper075xkw/output=format:jpg/cmkdhzu6oz17i07nahicxye78",
+    "https://us-west-2.graphassets.com/cmkc1ejod2bpe07lper075xkw/output=format:jpg/cmkdi2h5qyz2r07mu8jcdsk4v",
+    "https://us-west-2.graphassets.com/cmkc1ejod2bpe07lper075xkw/output=format:jpg/cmkdi2gszyz2c07muna112ras",
+    "https://us-west-2.graphassets.com/cmkc1ejod2bpe07lper075xkw/output=format:jpg/cmkdhzugdyyg607mucghwriy2",
+    "https://us-west-2.graphassets.com/cmkc1ejod2bpe07lper075xkw/output=format:jpg/cmkdi2h32yz2k07muekh19s5n"
   ],
   especificacoes: {
     "Extensão da Via": "Aproximadamente 1,2 quilômetros",

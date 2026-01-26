@@ -263,8 +263,9 @@ const teamMembers = [
 const organizationLevels = [
   {
     level: "Proprietário",
-    positions: ["Proprietário - Mauro de Oliveira Prates"],
+    positions: ["Mauro de Oliveira Prates"],
     color: "bg-primary",
+    stack:true
   },
   {
     level: "Diretoria",
@@ -272,7 +273,7 @@ const organizationLevels = [
       "Diretor Técnico - Mauro de Oliveira Prates",
       "Diretor Administrativo-Financeiro - Anderson Santos Azevedo",
     ],
-    color: "bg-secondary",
+    color: "bg-primary",
     stack: true,
   },
   {
@@ -343,7 +344,7 @@ const Equipe = () => {
               <Users className="w-5 h-5 text-primary" />
               <span className="text-sm font-medium text-primary">{t("team.ourTeam")}</span>
             </div>
-            <h1 className="text-5xl md:text-6xl font-bold mb-6">{t("team.title")}</h1>
+            <h1 className="text-5xl md:text-6xl  font-bold mb-6">{t("team.title")}</h1>
             <p className="text-xl text-primary-foreground/90 max-w-3xl mx-auto">{t("team.subtitle")}</p>
           </div>
         </div>
@@ -369,7 +370,7 @@ const Equipe = () => {
                   <Card className="overflow-hidden border-muted/40">
                     <div className={`${level.color} h-2 w-full`} />
                     <CardContent className="p-8">
-                      <h3 className="text-xl font-bold mb-6 text-center tracking-tight uppercase text-muted-foreground/80">{level.level}</h3>
+                      <h3 className="text-xl font-bold mb-6 text-center tracking-tight uppercase text-primary">{level.level}</h3>
                       
                       <div className={`flex ${level.stack ? "flex-col items-center gap-4" : "flex-wrap justify-center gap-2"}`}>
                         {level.positions.map((position, posIndex) => (
