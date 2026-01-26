@@ -18,28 +18,28 @@ export const categoriaIcons: Record<
   React.ElementType
 > = {
   "Infraestrutura": TrafficCone,
-  "Construção": HardHat,
+  "Edificação": HardHat,
   "Urbanização": Trees,
   "Saneamento": Droplet,
   "Reformas": PaintRoller,
   "Habitação": Home,
   "Manutenção": Wrench,
   "Pavimentação": Route,
-  "Abasteciemto": Truck,
+  "Abastecimento": Truck,
 };
 
 export type ProjetoEngenharia = {
   id: string;
   categoria:
     | "Infraestrutura"
-    | "Construção"
+    | "Edificação"
     | "Urbanização"
     | "Saneamento"
     | "Reformas"
     | "Habitação"
     | "Manutenção"
     | "Pavimentação"
-    | "Abasteciemto";
+    | "Abastecimento";
   titulo: string;
   descricao: string;
   descricaoCompleta?: string;
@@ -64,7 +64,7 @@ export type ProjetoEngenharia = {
 
 export const ICOMProject: ProjetoEngenharia = {
   id: "prj_icom_01",
-  categoria: "Construção",
+  categoria: "Edificação",
   titulo: "Instituto Couto Maia - ICOM",
   descricao:
     "Unidade de referência da Bahia especializada exclusivamente no tratamento de doenças transmissíveis de alta complexidade.",
@@ -102,7 +102,7 @@ export const ICOMProject: ProjetoEngenharia = {
 
 export const CentroConvencoesProject: ProjetoEngenharia = {
   id: "prj_centro_conv_02",
-  categoria: "Construção",
+  categoria: "Edificação",
   titulo: "Centro de Convenções e Teatro - Feira de Santana",
   descricao:
     "Projeto de centro de convenções destinado à realização de eventos, congressos e atividades institucionais, com infraestrutura moderna e capacidade ampliada.",
@@ -186,7 +186,7 @@ export const VLTProject: ProjetoEngenharia = {
 
 export const EdificioGaragemProject: ProjetoEngenharia = {
   id: "prj_garagem_04",
-  categoria: "Infraestrutura",
+  categoria: "Edificação",
   titulo: "Edifício Garagem",
   descricao:
     "Edifício destinado ao estacionamento vertical, projetado para atender demandas urbanas e institucionais.",
@@ -224,7 +224,7 @@ export const EdificioGaragemProject: ProjetoEngenharia = {
 
 export const CleristonAndradeProject: ProjetoEngenharia = {
   id: "prj_cleriston_05",
-  categoria: "Construção",
+  categoria: "Edificação",
   titulo: "Hospital Clériston Andrade",
   descricao:
     "Projeto hospitalar de grande porte, com ampliação e modernização da infraestrutura de atendimento à saúde.",
@@ -257,12 +257,12 @@ export const CleristonAndradeProject: ProjetoEngenharia = {
 
 export const EscolaDivaPortelaProject: ProjetoEngenharia = {
   id: "prj_escola_diva_06",
-  categoria: "Construção",
+  categoria: "Edificação",
   titulo: "Escola Municipal Diva Portela",
   descricao:
     "Projeto educacional com estrutura completa para ensino, esporte e convivência.",
   descricaoCompleta:
-    "A obra de reconstrução total da Escola Diva Portela abrangeu cerca de 3.500 m² de área construída, transformando a unidade em um complexo moderno e acessível em 19 meses de execução. O projeto estrutural priorizou a verticalização para otimizar o terreno, distribuindo 15 salas de aula climatizadas, laboratórios e auditório, além de uma infraestrutura esportiva de alto padrão com ginásio poliesportivo e piscina olímpica. A execução focou na integração de sistemas sustentáveis, como o aquecimento solar, e no cumprimento rigoroso das normas de acessibilidade, consolidando um equipamento público de alta durabilidade e baixo custo de manutenção.",
+    "A obra de reEdificação total da Escola Diva Portela abrangeu cerca de 3.500 m² de área construída, transformando a unidade em um complexo moderno e acessível em 19 meses de execução. O projeto estrutural priorizou a verticalização para otimizar o terreno, distribuindo 15 salas de aula climatizadas, laboratórios e auditório, além de uma infraestrutura esportiva de alto padrão com ginásio poliesportivo e piscina olímpica. A execução focou na integração de sistemas sustentáveis, como o aquecimento solar, e no cumprimento rigoroso das normas de acessibilidade, consolidando um equipamento público de alta durabilidade e baixo custo de manutenção.",
   status: "Concluído",
   relevancia: 3,
   cliente: "Prefeitura de Feira de Santana",
@@ -307,7 +307,7 @@ export const EscolaDivaPortelaProject: ProjetoEngenharia = {
 
 export const HospitalItaberabaProject: ProjetoEngenharia = {
   id: "prj_itaberaba",
-  categoria: "Construção",
+  categoria: "Edificação",
   titulo: "Hospital Regional de Itaberaba",
   descricao: "Reforma integral e ampliação da infraestrutura hospitalar para atendimento de alta complexidade na Chapada Diamantina.",
   descricaoCompleta: "O projeto contemplou a adequação total do espaço físico e a ampliação da unidade, que agora conta com mais de 100 leitos, incluindo UTIs adulto e pediátrica. A obra focou na modernização das salas de cirurgia, implantação de um moderno centro de bioimagem (CT e Raio-X) e reestruturação das enfermarias. Esta intervenção foi fundamental para descentralizar a saúde no estado, permitindo que o hospital passasse a oferecer serviços de urgência, emergência e cirurgias eletivas para Itaberaba e outros 11 municípios da região.",
@@ -340,7 +340,7 @@ export const HospitalItaberabaProject: ProjetoEngenharia = {
 
 export const HospitalItabunaProject: ProjetoEngenharia = {
   id: "prj_itabuna",
-  categoria: "Construção",
+  categoria: "Edificação",
   titulo: "Hospital de Base Luís Eduardo Magalhães",
   descricao: "Elaboração de projetos e execução de obras para ampliação e reforma integral do Hospital de Base, modernizando a infraestrutura para alta complexidade e emergência..",
   descricaoCompleta: "O projeto consistiu na contratação integrada para o desenvolvimento dos projetos básicos e executivos, seguidos pela execução física das obras de reforma e expansão do Hospital de Base Luís Eduardo Magalhães. A intervenção focou na reestruturação completa do pronto-socorro, na criação de novas alas de internamento e na modernização do centro cirúrgico. Com a ampliação, a unidade recebeu reforço estrutural para comportar novos leitos de UTI e unidades de cuidados intermediários, além de uma readequação total dos fluxos hospitalares conforme as normas da RDC 50 da ANVISA. O empreendimento visou não apenas a melhoria estética, mas a eficiência operacional necessária para atender a demanda crescente da macrorregião Sul da Bahia, integrando sistemas avançados de climatização, gases medicinais e instalações elétricas de suporte crítico.",
@@ -409,10 +409,10 @@ export const ViaBarradaoProject: ProjetoEngenharia = {
     duracao: "9 meses",
   },
   imagens: [
+    "https://us-west-2.graphassets.com/cmkc1ejod2bpe07lper075xkw/output=format:jpg/cmkdhzu6oz17i07nahicxye78",
     "https://us-west-2.graphassets.com/cmkc1ejod2bpe07lper075xkw/output=format:jpg/cmkdhztk7yyef07muqmlcb96o",
     "https://us-west-2.graphassets.com/cmkc1ejod2bpe07lper075xkw/output=format:jpg/cmkdhztq7z16e07naxjj2sgm1",
     "https://us-west-2.graphassets.com/cmkc1ejod2bpe07lper075xkw/output=format:jpg/cmkdhzttpyyf207mudisb1ikz",
-    "https://us-west-2.graphassets.com/cmkc1ejod2bpe07lper075xkw/output=format:jpg/cmkdhzu6oz17i07nahicxye78",
     "https://us-west-2.graphassets.com/cmkc1ejod2bpe07lper075xkw/output=format:jpg/cmkdi2h5qyz2r07mu8jcdsk4v",
     "https://us-west-2.graphassets.com/cmkc1ejod2bpe07lper075xkw/output=format:jpg/cmkdi2gszyz2c07muna112ras",
     "https://us-west-2.graphassets.com/cmkc1ejod2bpe07lper075xkw/output=format:jpg/cmkdhzugdyyg607mucghwriy2",

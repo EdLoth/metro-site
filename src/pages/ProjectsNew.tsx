@@ -42,19 +42,18 @@ const ProjectsNew = () => {
   const { t } = useLanguage();
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
   const [selectedStatus, setSelectedStatus] = useState<string>("all");
-  const [isFiltersOpen, setIsFiltersOpen] = useState(true);
+  const [isFiltersOpen, setIsFiltersOpen] = useState(false);
 
   const categories = [
     { id: "all", label: "Todos os Setores", icon: LayoutGrid },
     { id: "Infraestrutura", label: "Infraestrutura", icon: TrafficCone },
-    { id: "Construção", label: "Construção", icon: HardHat },
+    { id: "Edificação", label: "Edificação", icon: HardHat },
     { id: "Urbanização", label: "Urbanização", icon: Trees },
     { id: "Saneamento", label: "Saneamento", icon: Droplet },
     { id: "Reformas", label: "Reformas", icon: PaintRoller },
     { id: "habitação", label: "Habitação", icon: Home },
     { id: "Manutenção", label: "Manutenção", icon: Wrench },
     { id: "Pavimentação", label: "Pavimentação", icon: Route },
-    { id: "Abasteciemto", label: "Abastecimento", icon: Truck },
   ];
 
   const statuses = [
@@ -146,7 +145,10 @@ const ProjectsNew = () => {
                     return (
                       <button
                         key={cat.id}
-                        onClick={() => setSelectedCategory(cat.id)}
+                        onClick={() => {
+                          setSelectedCategory(cat.id); 
+                          setIsFiltersOpen(false)
+                        }}
                         className={`group p-4 rounded-xl border flex flex-col items-center gap-3 transition-all duration-300 ${
                           isActive
                             ? "bg-primary border-primary shadow-lg shadow-primary/20"
