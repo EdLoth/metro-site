@@ -14,7 +14,7 @@ const HeroSection = () => {
   });
 
   const stats = [
-    { key: "projects", end: 150, suffix: "+", label: "Obras Finalizadas" },
+    { key: "projects", end: 500, suffix: "+", label: "Obras Finalizadas" },
     { key: "years", end: 20, suffix: "+", label: "Anos no Mercado" },
   ];
 
