@@ -1,58 +1,130 @@
 import { useParams, Link } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import {
-  Calendar,
-  Clock,
   MapPin,
   CheckCircle2,
-  Ruler,
   Building2,
   ArrowLeft,
-  Hospital,
-  TrafficCone,
-  GraduationCap,
-  Home,
-  HardHat,
-  Trees,
-  Droplet,
-  Route,
-  PaintRoller,
-  ClockIcon,
   ChevronLeft,
   ChevronRight,
-  Maximize2,
   X,
-  Wrench,
-  Truck,
+  Calendar,
+  ChevronDown,
+  ChevronUp,
 } from "lucide-react";
 import { getProjectById } from "@/data/projects";
-import { useLanguage } from "@/contexts/LanguageContext";
-import { ProjetoEngenharia } from "@/projects";
+import {
+  ProjetoEngenharia,
+  MultiProjetoBase,
+  categoriaIcons,
+} from "@/projects/types";
 
-const categoryIcons: Record<string, React.ElementType> = {
-  Infraestrutura: TrafficCone,
-  Construção: HardHat,
-  Urbanização: Trees,
-  Saneamento: Droplet,
-  Reformas: PaintRoller,
-  Habitação: Home,
-  Manutenção: Wrench,
-  Pavimentação: Route,
-  Abasteciemto: Truck,
+// --- Tipos e Type Guards ---
+function isMultiProjeto(
+  project: ProjetoEngenharia
+): project is MultiProjetoBase {
+  return (project as any).tipoEspecial === "multi_projetos";
+}
+
+// --- Sub-componente: Item de Especificação com Accordion ---
+const SpecificationItem = ({
+  label,
+  value,
+}: {
+  label: string;
+  value: string;
+}) => {
+  const [isExpanded, setIsExpanded] = useState(false);
+  // Define o limite de caracteres antes de cortar
+  const CHAR_LIMIT = 45;
+  const isLongText = value.length > CHAR_LIMIT;
+
+  return (
+    <div className="flex items-start gap-3 p-3 bg-white dark:bg-black/20 rounded-xl border border-slate-100 dark:border-white/5 shadow-sm transition-all hover:border-primary/20">
+      <CheckCircle2 className="w-4 h-4 text-primary shrink-0 mt-0.5" />
+      <div className="min-w-0 flex-1">
+        <p className="text-[9px] opacity-60 uppercase font-bold truncate tracking-tight mb-0.5">
+          {label}
+        </p>
+        <div className="text-xs font-black text-foreground/90">
+          {isLongText && !isExpanded ? (
+            <>
+              {value.slice(0, CHAR_LIMIT)}...
+              <button
+                onClick={() => setIsExpanded(true)}
+                className="ml-1 text-[10px] text-primary hover:underline font-bold inline-flex items-center gap-0.5"
+              >
+                Ver mais <ChevronDown className="w-3 h-3" />
+              </button>
+            </>
+          ) : (
+            <>
+              {value}
+              {isLongText && (
+                <button
+                  onClick={() => setIsExpanded(false)}
+                  className="ml-1 text-[10px] text-primary hover:underline font-bold inline-flex items-center gap-0.5"
+                >
+                  Menos <ChevronUp className="w-3 h-3" />
+                </button>
+              )}
+            </>
+          )}
+        </div>
+      </div>
+    </div>
+  );
 };
 
+// --- Sub-componente: Miniatura Otimizada ---
+// Renderiza a imagem apenas se estiver "perto" do índice selecionado para economizar memória
+const LazyThumbnail = ({
+  item,
+  isSelected,
+  onClick,
+  shouldRenderImage,
+}: {
+  item: { url: string };
+  isSelected: boolean;
+  onClick: () => void;
+  shouldRenderImage: boolean;
+}) => {
+  return (
+    <button
+      onClick={onClick}
+      className={`relative flex-shrink-0 w-20 md:w-32 aspect-video rounded-lg overflow-hidden border-2 transition-all snap-start ${
+        isSelected
+          ? "border-primary scale-95 shadow-lg opacity-100"
+          : "border-transparent opacity-40 hover:opacity-100 bg-slate-100 dark:bg-slate-800"
+      }`}
+    >
+      {shouldRenderImage ? (
+        <img
+          src={item.url}
+          className="w-full h-full object-cover"
+          loading="lazy"
+          decoding="async"
+          alt="Thumbnail"
+        />
+      ) : (
+        // Placeholder leve enquanto a imagem não precisa ser renderizada
+        <div className="w-full h-full bg-slate-200 dark:bg-white/5 animate-pulse" />
+      )}
+    </button>
+  );
+};
+
+// --- Componente Principal ---
 const ProjectDetailNew = () => {
   const { id } = useParams<{ id: string }>();
   const [project, setProject] = useState<ProjetoEngenharia | null>(null);
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
-  const [direction, setDirection] = useState(0);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const { t } = useLanguage();
 
   useEffect(() => {
     if (id) {
@@ -64,100 +136,115 @@ const ProjectDetailNew = () => {
     }
   }, [id]);
 
-  const handlePrevImage = (e?: React.MouseEvent) => {
-    e?.stopPropagation();
-    if (!project) return;
-    setDirection(-1);
-    setSelectedImageIndex((prev) =>
-      prev === 0 ? project.imagens.length - 1 : prev - 1,
-    );
+  const galleryItems = useMemo(() => {
+    if (!project) return [];
+
+    if (isMultiProjeto(project)) {
+      return project.empreendimentos.flatMap((emp) =>
+        emp.imagens.map((img) => ({
+          url: img,
+          context: {
+            titulo: emp.titulo,
+            cliente: emp.cliente || project.cliente,
+            localizacao: emp.localizacao || project.localizacao,
+            especificacoes: emp.especificacoes,
+            descricao: emp.descricao,
+            periodo: emp.periodo,
+          },
+        }))
+      );
+    }
+
+    return project.imagens.map((img) => ({
+      url: img,
+      context: {
+        titulo: project.titulo,
+        cliente: project.cliente,
+        localizacao: project.localizacao,
+        especificacoes: project.especificacoes,
+        descricao: project.descricao,
+        periodo: project.periodo,
+      },
+    }));
+  }, [project]);
+
+  if (!project || galleryItems.length === 0) return null;
+
+  const currentItem = galleryItems[selectedImageIndex];
+  const CategoryIcon = categoriaIcons[project.categoria] || Building2;
+
+  const fadeVariants = {
+    initial: { opacity: 0 },
+    animate: { opacity: 1 },
+    exit: { opacity: 0 },
   };
 
-  const handleNextImage = (e?: React.MouseEvent) => {
-    e?.stopPropagation();
-    if (!project) return;
-    setDirection(1);
-    setSelectedImageIndex((prev) =>
-      prev === project.imagens.length - 1 ? 0 : prev + 1,
-    );
+  const paginate = (newDirection: number) => {
+    setSelectedImageIndex((prev) => {
+      let next = prev + newDirection;
+      if (next < 0) next = galleryItems.length - 1;
+      if (next >= galleryItems.length) next = 0;
+      return next;
+    });
   };
 
-  if (!project) return null;
-
-  const statusColors = {
-    completed:
-      "bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200",
-    "in-progress":
-      "bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200",
-  };
-
-  const projectStatusKey =
-    project.status === "Concluído" ? "completed" : "in-progress";
-  const CategoryIcon = categoryIcons[project.categoria] || Building2;
-
-  // Variantes de animação de slide
-  const variants = {
-    enter: (direction: number) => ({
-      x: direction > 0 ? "100%" : "-100%",
-      opacity: 0,
-    }),
-    center: {
-      x: 0,
-      opacity: 1,
-    },
-    exit: (direction: number) => ({
-      x: direction < 0 ? "100%" : "-100%",
-      opacity: 0,
-    }),
-  };
+  // Verifica se há muitas especificações para ativar o scroll
+  const specs = currentItem.context.especificacoes || {};
+  const hasSpecs = Object.keys(specs).length > 0;
+  // Se tiver mais de 5 itens, vamos limitar a altura
+  const shouldUseScroll = Object.keys(specs).length > 5;
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background overflow-x-hidden">
       <Navigation />
 
-      {/* LIGHTBOX / MODAL */}
       <AnimatePresence>
         {isModalOpen && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[100] bg-black/95 flex items-center justify-center p-4 md:p-10"
+            className="fixed inset-0 z-[100] bg-black/95 flex items-center justify-center p-2 md:p-10"
             onClick={() => setIsModalOpen(false)}
           >
-            <button className="absolute top-6 right-6 text-white hover:text-primary transition-colors">
-              <X className="w-10 h-10" />
+            <button className="absolute top-4 right-4 text-white p-2 z-[110]">
+              <X className="w-8 h-8" />
             </button>
             <motion.img
-              initial={{ scale: 0.9, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              src={project.imagens[selectedImageIndex]}
-              className="max-w-full max-h-full object-contain rounded-lg shadow-2xl"
+              key={currentItem.url}
+              src={currentItem.url}
+              className="max-w-full max-h-full object-contain shadow-2xl"
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.2 }}
             />
           </motion.div>
         )}
       </AnimatePresence>
 
-      <section className="pt-24 pb-12 bg-primary text-primary-foreground">
+      <section className="pt-20 md:pt-12 pb-8 md:pb-16 bg-primary text-primary-foreground">
         <div className="container mx-auto px-4">
           <Link
             to="/projetos"
-            className="inline-flex items-center gap-2 text-white/80 hover:text-white mb-6"
+            className="inline-flex items-center gap-2 text-white/70 hover:text-white mb-6 text-sm transition-colors"
           >
-            <ArrowLeft className="w-4 h-4" /> Voltar para projetos
+            <ArrowLeft className="w-4 h-4" /> Voltar
           </Link>
-          <div className="flex flex-col md:flex-row justify-between gap-6">
-            <div className="flex-1">
-              <div>
-                <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">
-                  {project.titulo}
-                </h1>
-                <p className="text-xl text-white/90 max-w-4xl">
+
+          <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
+            <div className="space-y-4">
+              <h1 className="text-2xl md:text-5xl font-bold leading-tight">
+                {project.titulo}
+              </h1>
+              {project.descricao && (
+                <p className="text-lg md:text-xl text-white/80 max-w-4xl leading-relaxed font-medium">
                   {project.descricao}
                 </p>
-              </div>
-              
-              <Badge className="bg-white text-primary mb-4">
+              )}
+            </div>
+
+            <div className="flex-shrink-0">
+              <Badge className="bg-white text-primary py-2 px-4 text-sm shadow-lg whitespace-nowrap">
                 <CategoryIcon className="w-4 h-4 mr-2" /> {project.categoria}
               </Badge>
             </div>
@@ -165,175 +252,192 @@ const ProjectDetailNew = () => {
         </div>
       </section>
 
-      <section className="py-12 bg-background">
+      <section className="py-6 md:py-12">
         <div className="container mx-auto px-4">
-          <div className="grid lg:grid-cols-12 gap-10">
-            {/* CARROSSEL PRINCIPAL */}
-            <div className="lg:col-span-8">
+          <div className="flex flex-col lg:grid lg:grid-cols-12 gap-8">
+            {/* Coluna da Galeria */}
+            <div className="w-full lg:col-span-8 space-y-4">
               <div
-                className="relative aspect-video rounded-2xl overflow-hidden bg-black shadow-2xl group cursor-zoom-in"
-                onClick={() => setIsModalOpen(true)}
+                className="relative bg-black rounded-xl overflow-hidden shadow-2xl"
+                style={{
+                  height: "auto",
+                  minHeight: "350px",
+                  maxHeight: "70vh",
+                  aspectRatio: "16/9",
+                }}
               >
-                <AnimatePresence initial={false} custom={direction}>
-                  <motion.img
-                    key={selectedImageIndex}
-                    src={project.imagens[selectedImageIndex]}
-                    custom={direction}
-                    variants={variants}
-                    initial="enter"
-                    animate="center"
-                    exit="exit"
-                    transition={{
-                      x: { type: "spring", stiffness: 300, damping: 30 },
-                      opacity: { duration: 0.2 },
-                    }}
-                    className="absolute inset-0 w-full h-full object-contain"
-                  />
-                </AnimatePresence>
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <AnimatePresence initial={false}>
+                    <motion.img
+                      key={selectedImageIndex}
+                      src={currentItem.url}
+                      variants={fadeVariants}
+                      initial="initial"
+                      animate="animate"
+                      exit="exit"
+                      transition={{ duration: 0.4, ease: "linear" }}
+                      className="absolute inset-0 w-full h-full object-contain cursor-zoom-in"
+                      onClick={() => setIsModalOpen(true)}
+                    />
+                  </AnimatePresence>
+                </div>
 
-                <div className="absolute inset-0 flex items-center justify-between p-4 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
+                <div className="absolute inset-0 flex items-center justify-between p-4 pointer-events-none z-20">
                   <button
-                    onClick={handlePrevImage}
-                    className="pointer-events-auto bg-black/50 hover:bg-primary p-3 rounded-full text-white transition-all"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      paginate(-1);
+                    }}
+                    className="pointer-events-auto bg-black/30 hover:bg-primary p-2 md:p-3 rounded-full text-white backdrop-blur-sm transition-all border border-white/5"
                   >
-                    <ChevronLeft className="w-8 h-8" />
+                    <ChevronLeft className="w-6 h-6 md:w-8 md:h-8" />
                   </button>
                   <button
-                    onClick={handleNextImage}
-                    className="pointer-events-auto bg-black/50 hover:bg-primary p-3 rounded-full text-white transition-all"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      paginate(1);
+                    }}
+                    className="pointer-events-auto bg-black/30 hover:bg-primary p-2 md:p-3 rounded-full text-white backdrop-blur-sm transition-all border border-white/5"
                   >
-                    <ChevronRight className="w-8 h-8" />
+                    <ChevronRight className="w-6 h-6 md:w-8 md:h-8" />
                   </button>
                 </div>
 
-                <div className="absolute top-4 right-4 bg-black/40 backdrop-blur-md p-2 rounded-lg text-white/80 group-hover:text-white transition-colors">
-                  <Maximize2 className="w-5 h-5" />
+                <div className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent p-6 pointer-events-none z-10">
+                  <p className="text-white text-sm md:text-base font-bold drop-shadow-md">
+                    {currentItem.context.titulo}
+                  </p>
+                </div>
+
+                <div className="absolute top-4 left-4 z-20">
+                  <div className="bg-black/50 backdrop-blur-md px-3 py-1 rounded-full text-white/90 text-[10px] font-bold border border-white/10">
+                    {selectedImageIndex + 1} / {galleryItems.length}
+                  </div>
                 </div>
               </div>
 
-              {/* PAGINAÇÃO DE MINIATURAS (ROW ÚNICA) */}
-              <div className="mt-6 flex items-center gap-4 bg-secondary/10 p-4 rounded-2xl border border-border">
-                <button
-                  onClick={handlePrevImage}
-                  className="p-2 hover:bg-white rounded-lg border transition-all active:scale-90"
-                >
-                  <ChevronLeft className="w-5 h-5 text-primary" />
-                </button>
+              {/* Strip de Thumbnails Otimizado */}
+              <div className="flex gap-2 overflow-x-auto py-2 px-1 snap-x scrollbar-hide">
+                {galleryItems.map((item, idx) => {
+                  // OTIMIZAÇÃO: Só renderiza a imagem real se estiver a 12 posições de distância
+                  // Isso previne que o navegador tente carregar 100 imagens de uma vez em multi-projetos
+                  const shouldRender = Math.abs(selectedImageIndex - idx) < 12;
 
-                <div className="flex-1 flex gap-3 overflow-x-auto no-scrollbar pb-2 pt-1 px-1">
-                  {project.imagens.map((img, idx) => (
-                    <button
+                  return (
+                    <LazyThumbnail
                       key={idx}
-                      onClick={() => {
-                        setDirection(idx > selectedImageIndex ? 1 : -1);
-                        setSelectedImageIndex(idx);
-                      }}
-                      className={`relative flex-shrink-0 w-24 md:w-32 aspect-video rounded-lg overflow-hidden border-2 transition-all ${
-                        selectedImageIndex === idx
-                          ? "border-primary scale-105 shadow-md"
-                          : "border-transparent opacity-50 hover:opacity-100"
-                      }`}
-                    >
-                      <img src={img} className="w-full h-full object-cover" />
-                    </button>
-                  ))}
-                </div>
-
-                <button
-                  onClick={handleNextImage}
-                  className="p-2 hover:bg-white rounded-lg border transition-all active:scale-90"
-                >
-                  <ChevronRight className="w-5 h-5 text-primary" />
-                </button>
+                      item={item}
+                      isSelected={selectedImageIndex === idx}
+                      onClick={() => setSelectedImageIndex(idx)}
+                      shouldRenderImage={shouldRender}
+                    />
+                  );
+                })}
               </div>
             </div>
 
-            {/* FICHA TÉCNICA */}
-            <div className="lg:col-span-4">
-              <Card className="shadow-xl border-primary/5">
-                <div className="bg-primary/5 p-5 border-b">
-                  <h2 className="text-xl font-bold flex items-center gap-2">
-                    <Building2 className="text-primary w-5 h-5" /> Ficha Técnica
-                  </h2>
-                </div>
+            {/* Coluna da Ficha Técnica */}
+            <div className="w-full lg:col-span-4">
+              <Card className="border-none shadow-xl bg-slate-50 dark:bg-slate-900/40 transition-all duration-300 ease-in-out h-auto self-start">
                 <CardContent className="p-6 space-y-6">
-                  <div className="space-y-4">
-                    <div className="flex items-start gap-4">
-                      <div className="p-2.5 bg-primary/10 rounded-xl">
-                        <Building2 className="w-5 h-5 text-primary" />
-                      </div>
-                      <div>
-                        <p className="text-[10px] uppercase font-black text-muted-foreground tracking-tighter">
-                          Cliente
-                        </p>
-                        <p className="text-sm font-bold">{project.cliente}</p>
-                      </div>
-                    </div>
-                    <div className="flex items-start gap-4">
-                      <div className="p-2.5 bg-primary/10 rounded-xl">
-                        <MapPin className="w-5 h-5 text-primary" />
-                      </div>
-                      <div>
-                        <p className="text-[10px] uppercase font-black text-muted-foreground tracking-tighter">
-                          Localização
-                        </p>
-                        <p className="text-sm font-bold">
-                          {project.localizacao}
-                        </p>
-                      </div>
-                    </div>
+                  <div className="space-y-1">
+                    <h2 className="text-lg font-black flex items-center gap-2 text-primary uppercase tracking-tight">
+                      <Building2 className="w-5 h-5" /> Ficha Técnica
+                    </h2>
+                    <div className="h-1 w-10 bg-primary rounded-full" />
                   </div>
 
-                  <div className="pt-6 border-t">
-                    <p className="text-[10px] uppercase font-black text-muted-foreground mb-4">
-                      Especificações
-                    </p>
-                    <div className="grid gap-3">
-                      {Object.entries(project.especificacoes).map(
-                        ([key, value]) =>
-                          value && (
-                            <div
-                              key={key}
-                              className="flex items-center gap-3 p-3 bg-slate-50 dark:bg-slate-900 rounded-xl border border-transparent hover:border-primary/20 transition-all"
-                            >
-                              {key === "areaConstruida" ? (
-                                <Ruler className="w-4 h-4 text-primary" />
-                              ) : (
-                                <CheckCircle2 className="w-4 h-4 text-primary" />
-                              )}
-                              <div className="flex-1">
-                                <p className="text-[10px] font-bold uppercase opacity-60">
-                                  {key.replace(/([A-Z])/g, " $1")}
-                                </p>
-                                <p className="text-xs font-semibold">
-                                  {Array.isArray(value)
-                                    ? value.join(" • ")
-                                    : value}
-                                </p>
-                              </div>
-                            </div>
-                          ),
-                      )}
+                  {/* Informações Principais (Fixo) */}
+                  <div className="grid grid-cols-1 gap-5">
+                    <div className="flex items-start gap-4 p-1">
+                      <div className="p-2.5 bg-primary/10 rounded-xl text-primary shrink-0">
+                        <Building2 className="w-5 h-5" />
+                      </div>
+                      <div className="min-w-0">
+                        <p className="text-[10px] uppercase text-muted-foreground font-black tracking-tighter">
+                          Cliente
+                        </p>
+                        <p className="text-sm font-bold leading-none mt-1">
+                          {currentItem.context.cliente}
+                        </p>
+                      </div>
                     </div>
+
+                    <div className="flex items-start gap-4 p-1">
+                      <div className="p-2.5 bg-primary/10 rounded-xl text-primary shrink-0">
+                        <MapPin className="w-5 h-5" />
+                      </div>
+                      <div className="min-w-0">
+                        <p className="text-[10px] uppercase text-muted-foreground font-black tracking-tighter">
+                          Localização
+                        </p>
+                        <p className="text-sm font-bold leading-none mt-1">
+                          {currentItem.context.localizacao}
+                        </p>
+                      </div>
+                    </div>
+
+                    {currentItem.context.periodo?.duracao && (
+                      <div className="flex items-start gap-4 p-1">
+                        <div className="p-2.5 bg-primary/10 rounded-xl text-primary shrink-0">
+                          <Calendar className="w-5 h-5" />
+                        </div>
+                        <div className="min-w-0">
+                          <p className="text-[10px] uppercase text-muted-foreground font-black tracking-tighter">
+                            Duração
+                          </p>
+                          <p className="text-sm font-bold leading-none mt-1">
+                            {currentItem.context.periodo.duracao}
+                          </p>
+                        </div>
+                      </div>
+                    )}
                   </div>
+
+                  {/* Especificações com Scroll e Accordion */}
+                  {hasSpecs && (
+                    <div className="space-y-3 pt-6 border-t border-slate-200 dark:border-white/5">
+                      <p className="text-[10px] uppercase text-muted-foreground font-black tracking-widest opacity-70">
+                        Especificações Técnicas
+                      </p>
+
+                      <div
+                        className={`grid grid-cols-1 gap-2 ${
+                          shouldUseScroll
+                            ? "max-h-[350px] overflow-y-auto pr-2 custom-scrollbar [&::-webkit-scrollbar]:w-1.5 [&::-webkit-scrollbar-thumb]:bg-slate-300 dark:[&::-webkit-scrollbar-thumb]:bg-slate-700 [&::-webkit-scrollbar-thumb]:rounded-full"
+                            : ""
+                        }`}
+                      >
+                        {Object.entries(specs).map(([key, value]) => (
+                          <SpecificationItem
+                            key={key}
+                            label={key}
+                            value={Array.isArray(value) ? value.join(", ") : String(value)}
+                          />
+                        ))}
+                      </div>
+                    </div>
+                  )}
                 </CardContent>
               </Card>
             </div>
           </div>
 
-          <div className="mt-16">
-            <h2 className="text-3xl font-bold mb-8 flex items-center gap-4">
-              <div className="h-10 w-2 bg-primary rounded-full" /> Sobre o
-              projeto
-            </h2>
-            <Card className="bg-slate-50 dark:bg-slate-900/50 border-none shadow-inner">
-              <CardContent className="p-8 md:p-12">
-                <p className="text-lg text-muted-foreground leading-relaxed whitespace-pre-line">
-                  {project.descricaoCompleta}
+          {(project.descricaoCompleta || currentItem.context.descricao) && (
+            <div className="mt-12 md:mt-20">
+              <div className="flex items-center gap-4 mb-6">
+                <h3 className="text-lg md:text-3xl font-semibold tracking-tighter shrink-0">
+                  Sobre este empreendimento
+                </h3>
+                <div className="h-px w-full bg-slate-200 dark:bg-white/10" />
+              </div>
+              <div className="bg-muted/30 p-6 md:p-10 rounded-2xl border border-transparent shadow-inner">
+                <p className="text-muted-foreground leading-relaxed text-base md:text-lg">
+                  {project.descricaoCompleta || currentItem.context.descricao}
                 </p>
-              </CardContent>
-            </Card>
-          </div>
+              </div>
+            </div>
+          )}
         </div>
       </section>
 
