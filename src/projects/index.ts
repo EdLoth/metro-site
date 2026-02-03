@@ -20,6 +20,8 @@ import {
   HospitalItaberabaProject,
   HospitalItabunaProject,
   ICOMProject,
+  HospitalDrJoseBorbaSanta,
+  HospitalRegionalLitoralNorte
 } from "./hospitais";
 import { VLTProject } from "./mobilidade_urbana";
 import {
@@ -101,6 +103,8 @@ export const allProjects: ProjetoEngenharia[] = [
   CleristonAndradeProject,
   HospitalItabunaProject,
   HospitalItaberabaProject,
+  HospitalDrJoseBorbaSanta,
+  HospitalRegionalLitoralNorte,
 
   //Escolas
   EscolaDivaPortelaProject,
