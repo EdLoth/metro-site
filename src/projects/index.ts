@@ -21,9 +21,9 @@ import {
   HospitalItabunaProject,
   ICOMProject,
 } from "./hospitais";
+import { VLTProject } from "./mobilidade_urbana";
 import {
   ViaBarradaoProject,
-  VLTProject,
   EstradasVicinais,
   ManutençãoCentroHistorico,
   ContencaoEncostas,
@@ -109,13 +109,15 @@ export const allProjects: ProjetoEngenharia[] = [
   EscolaDrDemosthenes,
   EscolaJoaoSerafim,
   EscolaManoelChristo,
-  
+
   //Obras Estruturantes
   ViaBarradaoProject,
-  VLTProject,
   EstradasVicinais,
   ManutençãoCentroHistorico,
   ContencaoEncostas,
+
+  //Mobilidade Urbana
+  VLTProject,
 
   //Edificação
   CentroConvencoesProject,

@@ -25,12 +25,13 @@ import {
   Waves,
   Building2,
   Building,
+  Car,
 } from "lucide-react";
-import { 
-  ProjetoEngenharia, 
-  MultiProjetoBase, 
+import {
+  ProjetoEngenharia,
+  MultiProjetoBase,
   categoriaLabels, // Importado para os textos bonitos
-  categoriaIcons   // Importado para garantir consistência com os types
+  categoriaIcons, // Importado para garantir consistência com os types
 } from "@/projects/types";
 import { truncateText } from "@/lib/utils";
 
@@ -63,10 +64,23 @@ const ProjectsNew = () => {
     { id: "EDIFICACAO", label: "Edificação", icon: HardHat },
     { id: "ESCOLAS", label: "Escolas", icon: GraduationCap },
     { id: "HABITACAO", label: "Habitação", icon: Home },
-    { id: "HOSPITAIS", label: "Hospitais e Unidades de Saúde", icon: Building2 },
-    { id: "MANUTENCAO_ESGOTAMENTO", label: "Manutenção de Esgotamento Sanitário", icon: Wrench },
+    {
+      id: "HOSPITAIS",
+      label: "Hospitais e Unidades de Saúde",
+      icon: Building2,
+    },
+    {
+      id: "MANUTENCAO_ESGOTAMENTO",
+      label: "Manutenção de Esgotamento Sanitário",
+      icon: Wrench,
+    },
+    { id: "MOBILIDADE_URBANA", label: "Mobilidade Urbana", icon: Car },
     { id: "OBRAS_ESTRUTURANTES", label: "Obras Estruturantes", icon: Building },
-    { id: "SANEAMENTO_AGUA", label: "Saneamento Abastecimento de Água", icon: Droplet },
+    {
+      id: "SANEAMENTO_AGUA",
+      label: "Saneamento Abastecimento de Água",
+      icon: Droplet,
+    },
     { id: "URBANIZACAO", label: "Urbanização", icon: Trees },
   ];
 
@@ -84,12 +98,10 @@ const ProjectsNew = () => {
       .filter((project) => {
         // Comparação direta pelo ID da categoria
         const categoryMatch =
-          selectedCategory === "all" ||
-          project.categoria === selectedCategory;
+          selectedCategory === "all" || project.categoria === selectedCategory;
 
         const statusMatch =
-          selectedStatus === "all" ||
-          project.status === selectedStatus;
+          selectedStatus === "all" || project.status === selectedStatus;
 
         return categoryMatch && statusMatch;
       })

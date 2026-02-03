@@ -7,7 +7,8 @@ import {
   Waves, 
   GraduationCap, 
   Building2, 
-  Building 
+  Building, 
+  Car
 } from "lucide-react";
 
 /* =========================
@@ -22,7 +23,9 @@ export type CategoriaProjeto =
   | "MANUTENCAO_ESGOTAMENTO"
   | "OBRAS_ESTRUTURANTES"
   | "SANEAMENTO_AGUA"
-  | "URBANIZACAO";
+  | "URBANIZACAO"
+  | "MOBILIDADE_URBANA";
+  
 
 /* =========================
    LABELS (TEXTOS PARA EXIBIÇÃO)
@@ -37,6 +40,7 @@ export const categoriaLabels: Record<CategoriaProjeto, string> = {
   "OBRAS_ESTRUTURANTES": "Obras Estruturantes",
   "SANEAMENTO_AGUA": "Saneamento e Abastecimento de Água",
   "URBANIZACAO": "Urbanização",
+  "MOBILIDADE_URBANA": "Mobilidade Urbana"
 };
 
 /* =========================
@@ -52,6 +56,7 @@ export const categoriaIcons: Record<CategoriaProjeto, React.ElementType> = {
   "OBRAS_ESTRUTURANTES": Building,
   "SANEAMENTO_AGUA": Droplet,
   "URBANIZACAO": Trees,
+  "MOBILIDADE_URBANA": Car
 };
 
 /* =========================
