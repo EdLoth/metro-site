@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import { useState, useMemo, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Navigation from "@/components/Navigation";
@@ -30,8 +30,8 @@ import {
 import {
   ProjetoEngenharia,
   MultiProjetoBase,
-  categoriaLabels, // Importado para os textos bonitos
-  categoriaIcons, // Importado para garantir consistência com os types
+  categoriaLabels,
+  categoriaIcons,
 } from "@/projects/types";
 import { truncateText } from "@/lib/utils";
 
@@ -46,18 +46,26 @@ function isMultiProjeto(
 
 const ProjectsNew = () => {
   const { t } = useLanguage();
+  const [searchParams, setSearchParams] = useSearchParams();
 
-  const [selectedCategory, setSelectedCategory] = useState<string>("all");
-  const [selectedStatus, setSelectedStatus] = useState<string>("all");
+  // INICIALIZAÇÃO VIA URL OU PADRÃO
+  const [selectedCategory, setSelectedCategory] = useState<string>(
+    searchParams.get("category") || "all"
+  );
+  const [selectedStatus, setSelectedStatus] = useState<string>(
+    searchParams.get("status") || "all"
+  );
+  
+  const [currentPage, setCurrentPage] = useState(
+    Number(searchParams.get("page")) || 1
+  );
+
   const [isFiltersOpen, setIsFiltersOpen] = useState(false);
-
-  // PAGINAÇÃO
-  const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(6);
 
   /* =========================
-      CATEGORIAS (Barra de Filtros)
-  ========================= */
+       CATEGORIAS (Barra de Filtros)
+   ========================= */
   const categories = [
     { id: "all", label: "Todos os Setores", icon: LayoutGrid },
     { id: "BARRAGEM", label: "Barragem", icon: Waves },
@@ -91,12 +99,23 @@ const ProjectsNew = () => {
   ];
 
   /* =========================
-      FILTRO
-  ========================= */
+       SINCRONIZAÇÃO COM URL
+   ========================= */
+  useEffect(() => {
+    const params: any = {};
+    if (selectedCategory !== "all") params.category = selectedCategory;
+    if (selectedStatus !== "all") params.status = selectedStatus;
+    if (currentPage > 1) params.page = currentPage.toString();
+    
+    setSearchParams(params);
+  }, [selectedCategory, selectedStatus, currentPage, setSearchParams]);
+
+  /* =========================
+       FILTRO
+   ========================= */
   const filteredProjects = useMemo(() => {
     return allProjects
       .filter((project) => {
-        // Comparação direta pelo ID da categoria
         const categoryMatch =
           selectedCategory === "all" || project.categoria === selectedCategory;
 
@@ -108,19 +127,27 @@ const ProjectsNew = () => {
       .sort((a, b) => (b.relevancia || 0) - (a.relevancia || 0));
   }, [selectedCategory, selectedStatus]);
 
-  useEffect(() => {
-    setCurrentPage(1);
-  }, [selectedCategory, selectedStatus]);
-
   /* =========================
-      PAGINAÇÃO
-  ========================= */
+       PAGINAÇÃO
+   ========================= */
   const totalPages = Math.ceil(filteredProjects.length / itemsPerPage);
 
   const paginatedProjects = filteredProjects.slice(
     (currentPage - 1) * itemsPerPage,
     currentPage * itemsPerPage,
   );
+
+  // Handlers para resetar a página ao filtrar
+  const handleCategorySelect = (id: string) => {
+    setSelectedCategory(id);
+    setCurrentPage(1);
+    setIsFiltersOpen(false);
+  };
+
+  const handleStatusSelect = (value: string) => {
+    setSelectedStatus(value);
+    setCurrentPage(1);
+  };
 
   return (
     <div className="min-h-screen bg-[#F8FAFC] dark:bg-slate-950">
@@ -168,7 +195,7 @@ const ProjectsNew = () => {
               {statuses.map((s) => (
                 <button
                   key={s.value}
-                  onClick={() => setSelectedStatus(s.value)}
+                  onClick={() => handleStatusSelect(s.value)}
                   className={`px-4 py-2 rounded-full text-[10px] font-bold uppercase transition-all border ${
                     selectedStatus === s.value
                       ? "bg-primary text-white border-primary"
@@ -197,10 +224,7 @@ const ProjectsNew = () => {
                     return (
                       <button
                         key={cat.id}
-                        onClick={() => {
-                          setSelectedCategory(cat.id);
-                          setIsFiltersOpen(false);
-                        }}
+                        onClick={() => handleCategorySelect(cat.id)}
                         className={`group p-4 rounded-xl border flex flex-col items-center gap-3 transition-all duration-300 ${
                           isActive
                             ? "bg-primary border-primary shadow-lg shadow-primary/20"
@@ -245,7 +269,6 @@ const ProjectsNew = () => {
             <>
               <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
                 {paginatedProjects.map((project) => {
-                  // Aqui usamos o objeto importado de types.ts
                   const CategoryIcon = categoriaIcons[project.categoria];
                   const multiProjeto = isMultiProjeto(project);
 
@@ -278,7 +301,6 @@ const ProjectsNew = () => {
                                 {CategoryIcon && (
                                   <CategoryIcon className="w-3 h-3 text-primary" />
                                 )}
-                                {/* AQUI ESTÁ A CORREÇÃO: Usando categoriaLabels */}
                                 {categoriaLabels[project.categoria]}
                               </Badge>
                             </div>

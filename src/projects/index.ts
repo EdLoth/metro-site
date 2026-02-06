@@ -21,7 +21,7 @@ import {
   HospitalItabunaProject,
   ICOMProject,
   HospitalDrJoseBorbaSanta,
-  HospitalRegionalLitoralNorte
+  HospitalRegionalLitoralNorte,
 } from "./hospitais";
 import { VLTProject } from "./mobilidade_urbana";
 import {
@@ -31,7 +31,15 @@ import {
   ContencaoEncostas,
 } from "./obras-estruturantes";
 import { ProjetoEngenharia } from "./types";
-import { PracasMaceioProjeto } from "./urbanizacao";
+import {
+  ArenaHenriqueEquelman,
+  ArenaHenriqueEquelmanAntares,
+  PracaCentenario,
+  PracaCidadeSorriso,
+  PracaGracilianoRamos,
+  PracaMarechalDeodoro,
+  PracaMontepio,
+} from "./urbanizacao";
 
 export const ManutençãoEsgotamentoSanitario: ProjetoEngenharia = {
   id: "prj_manutencao_esgotamento_sanitario",
@@ -137,7 +145,13 @@ export const allProjects: ProjetoEngenharia[] = [
   MinhaCasaMinhaVidaProjeto,
 
   //Urbanização
-  PracasMaceioProjeto,
+  ArenaHenriqueEquelman,
+  ArenaHenriqueEquelmanAntares,
+  PracaCentenario,
+  PracaCidadeSorriso,
+  PracaGracilianoRamos,
+  PracaMarechalDeodoro,
+  PracaMontepio,
 
   //Manutenção
   ManutençãoEsgotamentoSanitario,

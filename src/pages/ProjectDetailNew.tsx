@@ -1,4 +1,4 @@
-import { useParams, Link } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { useEffect, useMemo, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Navigation from "@/components/Navigation";
@@ -40,7 +40,6 @@ const SpecificationItem = ({
   value: string;
 }) => {
   const [isExpanded, setIsExpanded] = useState(false);
-  // Define o limite de caracteres antes de cortar
   const CHAR_LIMIT = 45;
   const isLongText = value.length > CHAR_LIMIT;
 
@@ -82,7 +81,6 @@ const SpecificationItem = ({
 };
 
 // --- Sub-componente: Miniatura Otimizada ---
-// Renderiza a imagem apenas se estiver "perto" do índice selecionado para economizar memória
 const LazyThumbnail = ({
   item,
   isSelected,
@@ -112,7 +110,6 @@ const LazyThumbnail = ({
           alt="Thumbnail"
         />
       ) : (
-        // Placeholder leve enquanto a imagem não precisa ser renderizada
         <div className="w-full h-full bg-slate-200 dark:bg-white/5 animate-pulse" />
       )}
     </button>
@@ -122,6 +119,7 @@ const LazyThumbnail = ({
 // --- Componente Principal ---
 const ProjectDetailNew = () => {
   const { id } = useParams<{ id: string }>();
+  const navigate = useNavigate();
   const [project, setProject] = useState<ProjetoEngenharia | null>(null);
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -188,10 +186,8 @@ const ProjectDetailNew = () => {
     });
   };
 
-  // Verifica se há muitas especificações para ativar o scroll
   const specs = currentItem.context.especificacoes || {};
   const hasSpecs = Object.keys(specs).length > 0;
-  // Se tiver mais de 5 itens, vamos limitar a altura
   const shouldUseScroll = Object.keys(specs).length > 5;
 
   return (
@@ -224,12 +220,15 @@ const ProjectDetailNew = () => {
 
       <section className="pt-20 md:pt-12 pb-8 md:pb-16 bg-primary text-primary-foreground">
         <div className="container mx-auto px-4">
-          <Link
-            to="/projetos"
-            className="inline-flex items-center gap-2 text-white/70 hover:text-white mb-6 text-sm transition-colors"
+          <button
+            onClick={(e) => {
+              e.preventDefault();
+              navigate(-1);
+            }}
+            className="inline-flex items-center gap-2 text-white/70 hover:text-white mb-6 text-sm transition-colors bg-transparent border-none cursor-pointer p-0"
           >
             <ArrowLeft className="w-4 h-4" /> Voltar
-          </Link>
+          </button>
 
           <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
             <div className="space-y-4">
@@ -244,7 +243,7 @@ const ProjectDetailNew = () => {
             </div>
 
             <div className="flex-shrink-0">
-              <Badge className="bg-white text-primary py-2 px-4 text-sm shadow-lg whitespace-nowrap">
+              <Badge className="bg-white hover:bg-white text-primary py-2 px-4 text-sm shadow-lg whitespace-nowrap">
                 <CategoryIcon className="w-4 h-4 mr-2" /> {project.categoria}
               </Badge>
             </div>
@@ -319,8 +318,6 @@ const ProjectDetailNew = () => {
               {/* Strip de Thumbnails Otimizado */}
               <div className="flex gap-2 overflow-x-auto py-2 px-1 snap-x scrollbar-hide">
                 {galleryItems.map((item, idx) => {
-                  // OTIMIZAÇÃO: Só renderiza a imagem real se estiver a 12 posições de distância
-                  // Isso previne que o navegador tente carregar 100 imagens de uma vez em multi-projetos
                   const shouldRender = Math.abs(selectedImageIndex - idx) < 12;
 
                   return (
@@ -412,7 +409,11 @@ const ProjectDetailNew = () => {
                           <SpecificationItem
                             key={key}
                             label={key}
-                            value={Array.isArray(value) ? value.join(", ") : String(value)}
+                            value={
+                              Array.isArray(value)
+                                ? value.join(", ")
+                                : String(value)
+                            }
                           />
                         ))}
                       </div>

@@ -24,7 +24,8 @@ export type CategoriaProjeto =
   | "OBRAS_ESTRUTURANTES"
   | "SANEAMENTO_AGUA"
   | "URBANIZACAO"
-  | "MOBILIDADE_URBANA";
+  | "MOBILIDADE_URBANA"
+  | "REQUALIFICACAO_URBANA";
   
 
 /* =========================
@@ -40,7 +41,8 @@ export const categoriaLabels: Record<CategoriaProjeto, string> = {
   "OBRAS_ESTRUTURANTES": "Obras Estruturantes",
   "SANEAMENTO_AGUA": "Saneamento e Abastecimento de Água",
   "URBANIZACAO": "Urbanização",
-  "MOBILIDADE_URBANA": "Mobilidade Urbana"
+  "MOBILIDADE_URBANA": "Mobilidade Urbana",
+  "REQUALIFICACAO_URBANA": "Requalificação Urbana"
 };
 
 /* =========================
@@ -56,7 +58,9 @@ export const categoriaIcons: Record<CategoriaProjeto, React.ElementType> = {
   "OBRAS_ESTRUTURANTES": Building,
   "SANEAMENTO_AGUA": Droplet,
   "URBANIZACAO": Trees,
-  "MOBILIDADE_URBANA": Car
+  "MOBILIDADE_URBANA": Car,
+  "REQUALIFICACAO_URBANA": Car
+
 };
 
 /* =========================
