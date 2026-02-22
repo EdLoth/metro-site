@@ -6,6 +6,7 @@ import {
   CaseVitoriaConquista,
   SedePrefeituraMunicipalLEM,
 } from "./edificacao";
+
 import {
   EscolaDivaPortelaProject,
   EscolaVistaAlegre,
@@ -14,7 +15,9 @@ import {
   EscolaJoaoSerafim,
   EscolaManoelChristo,
 } from "./escolas";
+
 import { MinhaCasaMinhaVidaProjeto } from "./habitacao";
+
 import {
   CleristonAndradeProject,
   HospitalItaberabaProject,
@@ -43,7 +46,7 @@ import {
 
 export const ManutençãoEsgotamentoSanitario: ProjetoEngenharia = {
   id: "prj_manutencao_esgotamento_sanitario",
-  categoria: "MANUTENCAO_ESGOTAMENTO",
+  categoria: "Manutenção Esgotamento",
   titulo: "Manutenção de esgotamento sanitário",
   descricao:
     "Manutenção de esgotamento sanitário em diversas localidades de Salvador",

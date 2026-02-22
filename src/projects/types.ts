@@ -15,51 +15,51 @@ import {
    TIPOS DE CATEGORIA (IDs)
 ========================= */
 export type CategoriaProjeto =
-  | "BARRAGEM"
-  | "EDIFICACAO"
-  | "ESCOLAS"
-  | "HABITACAO"
-  | "HOSPITAIS"
-  | "MANUTENCAO_ESGOTAMENTO"
-  | "OBRAS_ESTRUTURANTES"
-  | "SANEAMENTO_AGUA"
-  | "URBANIZACAO"
-  | "MOBILIDADE_URBANA"
-  | "REQUALIFICACAO_URBANA";
+  | "Barragem"
+  | "Edificação"
+  | "Escolas"
+  | "Habitação"
+  | "Hospitais"
+  | "Manutenção Esgotamento"
+  | "Obras Estruturantes"
+  | "Saneamento Água"
+  | "Urbanização"
+  | "Mobilidade Urbana"
+  | "Requalificação Urbana";
   
 
 /* =========================
    LABELS (TEXTOS PARA EXIBIÇÃO)
 ========================= */
 export const categoriaLabels: Record<CategoriaProjeto, string> = {
-  "BARRAGEM": "Barragem",
-  "EDIFICACAO": "Edificação",
-  "ESCOLAS": "Escolas",
-  "HABITACAO": "Habitação",
-  "HOSPITAIS": "Hospitais e Unidades de Saúde",
-  "MANUTENCAO_ESGOTAMENTO": "Manutenção de Esgotamento Sanitário",
-  "OBRAS_ESTRUTURANTES": "Obras Estruturantes",
-  "SANEAMENTO_AGUA": "Saneamento e Abastecimento de Água",
-  "URBANIZACAO": "Urbanização",
-  "MOBILIDADE_URBANA": "Mobilidade Urbana",
-  "REQUALIFICACAO_URBANA": "Requalificação Urbana"
+  "Barragem": "Barragem",
+  "Edificação": "Edificação",
+  "Escolas": "Escolas",
+  "Habitação": "Habitação",
+  "Hospitais": "Hospitais e Unidades de Saúde",
+  "Manutenção Esgotamento": "Manutenção de Esgotamento Sanitário",
+  "Obras Estruturantes": "Obras Estruturantes",
+  "Saneamento Água": "Saneamento e Abastecimento de Água",
+  "Urbanização": "Urbanização",
+  "Mobilidade Urbana": "Mobilidade Urbana",
+  "Requalificação Urbana": "Requalificação Urbana"
 };
 
 /* =========================
    ÍCONES POR CATEGORIA
 ========================= */
 export const categoriaIcons: Record<CategoriaProjeto, React.ElementType> = {
-  "BARRAGEM": Waves,
-  "EDIFICACAO": HardHat,
-  "ESCOLAS": GraduationCap,
-  "HABITACAO": Home,
-  "HOSPITAIS": Building2,
-  "MANUTENCAO_ESGOTAMENTO": Wrench,
-  "OBRAS_ESTRUTURANTES": Building,
-  "SANEAMENTO_AGUA": Droplet,
-  "URBANIZACAO": Trees,
-  "MOBILIDADE_URBANA": Car,
-  "REQUALIFICACAO_URBANA": Car
+  "Barragem": Waves,
+  "Edificação": HardHat,
+  "Escolas": GraduationCap,
+  "Habitação": Home,
+  "Hospitais": Building2,
+  "Manutenção Esgotamento": Wrench,
+  "Obras Estruturantes": Building,
+  "Saneamento Água": Droplet,
+  "Urbanização": Trees,
+  "Mobilidade Urbana": Car,
+  "Requalificação Urbana": Car
 
 };
 
@@ -95,7 +95,7 @@ export type ProjetoBase = {
 ========================= */
 export type MultiProjetoBase = {
   id: string;
-  categoria: "HABITACAO" | "URBANIZACAO"; 
+  categoria: "Habitação" | "Urbanização"; 
   titulo: string; 
   status: "Em andamento" | "Concluído";
   relevancia: number;

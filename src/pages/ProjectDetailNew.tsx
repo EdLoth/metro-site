@@ -31,6 +31,18 @@ function isMultiProjeto(
   return (project as any).tipoEspecial === "multi_projetos";
 }
 
+// --- FUNÇÕES AUXILIARES CLOUDINARY ---
+const getTinyUrl = (url: string) => {
+  if (!url) return "";
+  // w_50: largura pequena para placeholder
+  return url.replace("/upload/", "/upload/w_50,q_auto:low,f_auto/");
+};
+
+const getFullUrl = (url: string) => {
+  if (!url) return "";
+  return url.replace("/upload/", "/upload/f_auto,q_auto/");
+};
+
 // --- Sub-componente: Item de Especificação com Accordion ---
 const SpecificationItem = ({
   label,
@@ -92,6 +104,8 @@ const LazyThumbnail = ({
   onClick: () => void;
   shouldRenderImage: boolean;
 }) => {
+  const [isLoaded, setIsLoaded] = useState(false);
+
   return (
     <button
       onClick={onClick}
@@ -102,17 +116,74 @@ const LazyThumbnail = ({
       }`}
     >
       {shouldRenderImage ? (
-        <img
-          src={item.url}
-          className="w-full h-full object-cover"
-          loading="lazy"
-          decoding="async"
-          alt="Thumbnail"
-        />
+        <>
+          {/* Blur Layer */}
+          <img
+            src={getTinyUrl(item.url)}
+            className={`absolute inset-0 w-full h-full object-cover blur-md scale-110 transition-opacity duration-300 ${
+              isLoaded ? "opacity-0" : "opacity-100"
+            }`}
+            alt=""
+          />
+          {/* HD Layer */}
+          <img
+            src={getFullUrl(item.url)}
+            className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-500 ${
+              isLoaded ? "opacity-100" : "opacity-0"
+            }`}
+            loading="lazy"
+            decoding="async"
+            onLoad={() => setIsLoaded(true)}
+            alt="Thumbnail"
+          />
+        </>
       ) : (
         <div className="w-full h-full bg-slate-200 dark:bg-white/5 animate-pulse" />
       )}
     </button>
+  );
+};
+
+// --- Sub-componente: Imagem Principal da Galeria (Com Blur Up) ---
+// Extraído para lidar com o carregamento de cada slide
+const GalleryMainImage = ({
+  src,
+  onClick,
+}: {
+  src: string;
+  onClick: () => void;
+}) => {
+  const [isLoaded, setIsLoaded] = useState(false);
+
+  // Resetar estado quando o src mudar
+  useEffect(() => {
+    setIsLoaded(false);
+  }, [src]);
+
+  return (
+    <div
+      className="absolute inset-0 w-full h-full flex items-center justify-center cursor-zoom-in"
+      onClick={onClick}
+    >
+      {/* 1. Blur Placeholder (Contain) */}
+      <img
+        src={getTinyUrl(src)}
+        alt=""
+        className={`absolute inset-0 w-full h-full object-contain blur-xl scale-105 transition-opacity duration-700 ${
+          isLoaded ? "opacity-0" : "opacity-100"
+        }`}
+      />
+
+      {/* 2. HD Image (Contain) */}
+      <img
+        src={getFullUrl(src)}
+        alt="Gallery"
+        onLoad={() => setIsLoaded(true)}
+        className={`absolute inset-0 w-full h-full object-contain transition-opacity duration-500 ease-in-out ${
+          isLoaded ? "opacity-100" : "opacity-0"
+        }`}
+      />
+    </div>
   );
 };
 
@@ -123,6 +194,9 @@ const ProjectDetailNew = () => {
   const [project, setProject] = useState<ProjetoEngenharia | null>(null);
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  // Estado para imagem do modal
+  const [modalImageLoaded, setModalImageLoaded] = useState(false);
 
   useEffect(() => {
     if (id) {
@@ -194,6 +268,7 @@ const ProjectDetailNew = () => {
     <div className="min-h-screen bg-background overflow-x-hidden">
       <Navigation />
 
+      {/* --- MODAL (ZOOM) --- */}
       <AnimatePresence>
         {isModalOpen && (
           <motion.div
@@ -201,19 +276,32 @@ const ProjectDetailNew = () => {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             className="fixed inset-0 z-[100] bg-black/95 flex items-center justify-center p-2 md:p-10"
-            onClick={() => setIsModalOpen(false)}
+            onClick={() => {
+              setIsModalOpen(false);
+              setModalImageLoaded(false);
+            }}
           >
             <button className="absolute top-4 right-4 text-white p-2 z-[110]">
               <X className="w-8 h-8" />
             </button>
-            <motion.img
-              key={currentItem.url}
-              src={currentItem.url}
-              className="max-w-full max-h-full object-contain shadow-2xl"
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.2 }}
-            />
+            
+            <div className="relative w-full h-full flex items-center justify-center">
+               {/* Modal Tiny */}
+               <img 
+                 src={getTinyUrl(currentItem.url)}
+                 className={`absolute max-w-full max-h-full object-contain blur-xl transition-opacity duration-300 ${modalImageLoaded ? 'opacity-0' : 'opacity-100'}`}
+               />
+               
+               {/* Modal Full */}
+               <motion.img
+                 key={currentItem.url}
+                 src={getFullUrl(currentItem.url)}
+                 className={`max-w-full max-h-full object-contain shadow-2xl relative z-10 transition-opacity duration-500 ${modalImageLoaded ? 'opacity-100' : 'opacity-0'}`}
+                 initial={{ scale: 0.95 }}
+                 animate={{ scale: 1 }}
+                 onLoad={() => setModalImageLoaded(true)}
+               />
+            </div>
           </motion.div>
         )}
       </AnimatePresence>
@@ -254,6 +342,7 @@ const ProjectDetailNew = () => {
       <section className="py-6 md:py-12">
         <div className="container mx-auto px-4">
           <div className="flex flex-col lg:grid lg:grid-cols-12 gap-8">
+            
             {/* Coluna da Galeria */}
             <div className="w-full lg:col-span-8 space-y-4">
               <div
@@ -266,18 +355,22 @@ const ProjectDetailNew = () => {
                 }}
               >
                 <div className="absolute inset-0 flex items-center justify-center">
-                  <AnimatePresence initial={false}>
-                    <motion.img
+                  <AnimatePresence initial={false} mode="wait">
+                    <motion.div
                       key={selectedImageIndex}
-                      src={currentItem.url}
                       variants={fadeVariants}
                       initial="initial"
                       animate="animate"
                       exit="exit"
                       transition={{ duration: 0.4, ease: "linear" }}
-                      className="absolute inset-0 w-full h-full object-contain cursor-zoom-in"
-                      onClick={() => setIsModalOpen(true)}
-                    />
+                      className="absolute inset-0 w-full h-full"
+                    >
+                      {/* Componente que gerencia o Blur Up da imagem atual */}
+                      <GalleryMainImage 
+                        src={currentItem.url} 
+                        onClick={() => setIsModalOpen(true)}
+                      />
+                    </motion.div>
                   </AnimatePresence>
                 </div>
 

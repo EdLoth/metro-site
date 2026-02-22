@@ -10,8 +10,8 @@ const minhacasaminhavida_primavera01: MinhaCasaEmpreendimento = {
     duracao: "12 meses"
   },
   imagens: [
-    "https://us-west-2.graphassets.com/cmkc1ejod2bpe07lper075xkw/output=format:jpg/cml0sfcujjhk408lolmqwanmq",
-    "https://us-west-2.graphassets.com/cmkc1ejod2bpe07lper075xkw/output=format:jpg/cml0sfcyrjhkd08locc01mbym",
+    "https://res.cloudinary.com/dotoe2mkd/image/upload/v1771787836/Metro/gwkbtyc1fsi0cdbcwusz.jpg",
+    "https://res.cloudinary.com/dotoe2mkd/image/upload/v1771787834/Metro/sy3rt0brpe2kiij3bfds.jpg",
   ],
   especificacoes: {
     "Quantidade de Unidades": "Foram construídas 204 unidades",
@@ -34,8 +34,8 @@ const minhacasaminhavida_primavera02: MinhaCasaEmpreendimento = {
     duracao: "12 meses"
   },
   imagens: [
-    "https://us-west-2.graphassets.com/cmkc1ejod2bpe07lper075xkw/output=format:jpg/cml0sfd1vjhkk08lov9eh08oq",
-    "https://us-west-2.graphassets.com/cmkc1ejod2bpe07lper075xkw/output=format:jpg/cml0sfd4yjhkr08lodeasbk3o",
+    "https://res.cloudinary.com/dotoe2mkd/image/upload/v1771787748/Metro/jewemfx7bjhkezmjpz4u.jpg",
+    "https://res.cloudinary.com/dotoe2mkd/image/upload/v1771787746/Metro/n1fvbkphwdyifhamwazr.jpg",
   ],
   especificacoes: {
      "Quantidade de Unidades": "O projeto original contemplou aproximadamente 500 unidades habitacionais, expandindo consideravelmente a malha urbana do setor.",
@@ -55,8 +55,8 @@ const minhacasaminhavida_altodojunco: MinhaCasaEmpreendimento = {
   localizacao: "Barra - BA (Vale do São Francisco).",
 
   imagens: [
-    "https://us-west-2.graphassets.com/cmkc1ejod2bpe07lper075xkw/output=format:jpg/cml0sfd7piy5007lo3exhhqp5",
-    "https://us-west-2.graphassets.com/cmkc1ejod2bpe07lper075xkw/output=format:jpg/cml0sfdaxiy5707lozbcx261p",
+    "https://res.cloudinary.com/dotoe2mkd/image/upload/v1771787832/Metro/v02ddxwkdtvpowbuqe2i.jpg",
+    "https://res.cloudinary.com/dotoe2mkd/image/upload/v1771787781/Metro/yse7bpyfb6hf5jctteji.jpg",
   ],
   especificacoes: {
     "Quantidade de Unidades": "Foram construídas 150unidades habitacionais.",
@@ -77,8 +77,8 @@ const minhacasaminhavida_riogrande: MinhaCasaEmpreendimento = {
   localizacao: "Barra - BA (Vale do São Francisco).",
   cliente: "Governo Federal (via Caixa Econômica Federal) em parceria com o Governo do Estado da Bahia.",
   imagens: [
-    "https://us-west-2.graphassets.com/cmkc1ejod2bpe07lper075xkw/output=format:jpg/cml0sfddniy5f07lorp5zbbh5",
-    "https://us-west-2.graphassets.com/cmkc1ejod2bpe07lper075xkw/output=format:jpg/cml0sfdgkjhl908loif2oj18x",
+    "https://res.cloudinary.com/dotoe2mkd/image/upload/v1771787758/Metro/kss4xxrvhudenaqoj0l0.jpg",
+    "https://res.cloudinary.com/dotoe2mkd/image/upload/v1771787812/Metro/ul9tpgvqioduprsbgw9n.jpg",
   ],
   especificacoes: {
     "Quantidade de Unidades": "Foram construídas e entregues 450 unidades habitacionais.",
@@ -99,8 +99,8 @@ const minhacasaminhavida_soldocerrado: MinhaCasaEmpreendimento = {
   localizacao: "Bairro Jardim das Oliveiras (região de expansão), Luís Eduardo Magalhães - BA.",
   cliente: "Governo Federal (Caixa Econômica Federal) em parceria com a Prefeitura de Luís Eduardo Magalhães.",
   imagens: [
-    "https://us-west-2.graphassets.com/cmkc1ejod2bpe07lper075xkw/output=format:jpg/cml0sfdj1jhlg08loo70ecxtc",
-    "https://us-west-2.graphassets.com/cmkc1ejod2bpe07lper075xkw/output=format:jpg/cml0sfdlwiy6007loxbuiadnu",
+    "https://res.cloudinary.com/dotoe2mkd/image/upload/v1771787777/Metro/ri2x2s6veqsf5saranmi.jpg",
+    "https://res.cloudinary.com/dotoe2mkd/image/upload/v1771787779/Metro/lafbllykx3urcbfoy4q4.jpg",
   ],
   especificacoes: {
    "Quantidade de Unidades": "Foram construídas 800 unidades habitacionais.",
@@ -121,8 +121,8 @@ const minhacasaminhavida_residencialgurungas: MinhaCasaEmpreendimento = {
   cliente: "Governo Federal (via Caixa Econômica Federal) em parceria com a Prefeitura de Guanambi.",
   localizacao: "Bairro Gurungas, Guanambi - BA.",
   imagens: [
-    "https://us-west-2.graphassets.com/cmkc1ejod2bpe07lper075xkw/output=format:jpg/cml0sfdp4jhlx08lobg2jqyj7",
-    "https://us-west-2.graphassets.com/cmkc1ejod2bpe07lper075xkw/output=format:jpg/cml0sfdryiy6707lofybpktb0",
+    "https://res.cloudinary.com/dotoe2mkd/image/upload/v1771787809/Metro/iu6hxhpqnvjxyzjma8le.jpg",
+    "https://res.cloudinary.com/dotoe2mkd/image/upload/v1771787773/Metro/fv7ehopekywylsv0jltx.jpg",
   ],
   especificacoes: {
     "Quantidade de Unidades": "Foram construídas 300 unidades habitacionais.",
@@ -144,8 +144,8 @@ const minhacasaminhavida_residencialvistaalegre: MinhaCasaEmpreendimento = {
   localizacao: "Saída para o Tocantins (próximo ao Posto Mimosão), Luís Eduardo Magalhães - BA.",
   cliente: "Governo Federal (via Caixa Econômica Federal) em parceria com a Prefeitura de Luís Eduardo Magalhães.",
   imagens: [
-    "https://us-west-2.graphassets.com/cmkc1ejod2bpe07lper075xkw/output=format:jpg/cml0sfduwjhm408lofuu6mirn",
-    "https://us-west-2.graphassets.com/cmkc1ejod2bpe07lper075xkw/output=format:jpg/cml0sfdy0iy6e07los8zvvbhj",
+    "https://res.cloudinary.com/dotoe2mkd/image/upload/v1771787770/Metro/dkni4y5pxxuq6imluobk.jpg",
+    "https://res.cloudinary.com/dotoe2mkd/image/upload/v1771787744/Metro/vihoqfxilegt4zfttuih.jpg",
   ],
   especificacoes: {
   "Quantidade de Unidades": "Foram entregues 600 unidades habitacionais na primeira grande fase (Vista Alegre I e II).",
@@ -166,8 +166,8 @@ const minhacasaminhavida_residencialnovavida: MinhaCasaEmpreendimento = {
   cliente:
     "Governo Federal (Caixa Econômica Federal) em parceria com o Governo do Estado da Bahia e a Prefeitura de Valença.",
   imagens: [
-    "https://us-west-2.graphassets.com/cmkc1ejod2bpe07lper075xkw/output=format:jpg/resize=width:48,height:48,fit:crop/cml0sfe16jhmm08lozxrvs4tr",
-    "https://us-west-2.graphassets.com/cmkc1ejod2bpe07lper075xkw/output=format:jpg/cml0sfe43iy6l07log9nps9qq",
+    "https://res.cloudinary.com/dotoe2mkd/image/upload/v1771787752/Metro/wgbfnplsn2p43qr7mure.jpg",
+    "https://res.cloudinary.com/dotoe2mkd/image/upload/v1771787829/Metro/azkarnsu1yk5afqfcuz3.jpg",
   ],
   especificacoes: {
     "Quantidade de Unidades":
@@ -192,8 +192,8 @@ const minhacasaminhavida_residencialsaofrancisco: MinhaCasaEmpreendimento = {
   cliente:
     "Governo Federal (Ministério das Cidades/Caixa) em parceria com a Prefeitura de Barreiras.",
   imagens: [
-    "https://us-west-2.graphassets.com/cmkc1ejod2bpe07lper075xkw/output=format:jpg/cml0sfe9ziy7207loprv3su04",
-    "https://us-west-2.graphassets.com/cmkc1ejod2bpe07lper075xkw/output=format:jpg/cml0sfe76jhmt08loe6rz3zlh",
+    "https://res.cloudinary.com/dotoe2mkd/image/upload/v1771787799/Metro/dqc9uwbwrk492psbeaez.jpg",
+    "https://res.cloudinary.com/dotoe2mkd/image/upload/v1771787824/Metro/jqrd3kifzuj5lo8lzhfx.jpg",
   ],
   especificacoes: {
     "Quantidade de Unidades":
@@ -219,8 +219,8 @@ const minhacasaminhavida_residencialvaleverde: MinhaCasaEmpreendimento = {
   cliente:
     "Governo do Estado da Bahia / CONDER (Companhia de Desenvolvimento Urbano do Estado da Bahia), muitas vezes em parceria com prefeituras locais e a Caixa Econômica Federal.",
   imagens: [
-    "https://us-west-2.graphassets.com/cmkc1ejod2bpe07lper075xkw/output=format:jpg/cml0sfed1jhn008low2xof4tb",
-    "https://us-west-2.graphassets.com/cmkc1ejod2bpe07lper075xkw/output=format:jpg/cml0sfefzjhn708lox0s0bviv",
+    "https://res.cloudinary.com/dotoe2mkd/image/upload/v1771787814/Metro/fhgnmnok2cv9vfwe6cm0.jpg",
+    "https://res.cloudinary.com/dotoe2mkd/image/upload/v1771787751/Metro/nvdaule7ev3ir2voiztz.jpg",
   ],
   especificacoes: {
     "Quantidade de Unidades":
@@ -248,7 +248,7 @@ const minhacasaminhavida_residencialleandrinho: MinhaCasaEmpreendimento = {
   cliente:
     "Governo Federal (via Caixa Econômica Federal) em parceria com o Governo do Estado da Bahia e a Prefeitura de Dias D’Ávila.",
   imagens: [
-    "https://us-west-2.graphassets.com/cmkc1ejod2bpe07lper075xkw/output=format:jpg/cml0sfeiyiy7907loryf0doqf",
+    "https://res.cloudinary.com/dotoe2mkd/image/upload/v1771787806/Metro/uadfx8vchsgx4bv0itbc.jpg",
   ],
   especificacoes: {
     "Quantidade de Unidades":
@@ -270,8 +270,8 @@ const minhacasaminhavida_residencialgabriela: MinhaCasaEmpreendimento = {
   cliente:
     "Governo do Estado da Bahia / CONDER (Companhia de Desenvolvimento Urbano do Estado da Bahia), muitas vezes em parceria com prefeituras locais e a Caixa Econômica Federal.",
   imagens: [
-    "https://us-west-2.graphassets.com/cmkc1ejod2bpe07lper075xkw/output=format:jpg/cml0sfelnjhne08lohpelnh9w",
-    "https://us-west-2.graphassets.com/cmkc1ejod2bpe07lper075xkw/output=format:jpg/cml0sfeoniy7g07lokp5uiefh",
+    "https://res.cloudinary.com/dotoe2mkd/image/upload/v1771787788/Metro/xrtrgmnesazce9zxi8xt.jpg",
+    "https://res.cloudinary.com/dotoe2mkd/image/upload/v1771787790/Metro/qvyaeongyk7qo7retjr0.jpg",
   ],
   especificacoes: {
     "Quantidade de Unidades":
@@ -290,7 +290,7 @@ const minhacasaminhavida_residencialgabriela: MinhaCasaEmpreendimento = {
 
 export const MinhaCasaMinhaVidaProjeto: ProjetoEngenharia = {
   id: "prj_minha_casa_minha_vida",
-  categoria: "HABITACAO",
+  categoria: "Habitação",
   titulo: "Minha Casa Minha Vida",
   status: "Em andamento",
   cliente: "Governo do Estado da Bahia - CONDER",

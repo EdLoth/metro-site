@@ -2,7 +2,7 @@ import { ProjetoEngenharia } from "./types";
 
 export const EstradasVicinais: ProjetoEngenharia = {
   id: "prj_estradas_vicinais",
-  categoria: "SANEAMENTO_AGUA",
+  categoria: "Saneamento Água",
   titulo: "Eecução de obras em estradas vicinais ",
   descricao:
     "Execução de obra de melhoramento de rodovias vicinais que compõem a malha viária estadual.",
@@ -16,15 +16,15 @@ export const EstradasVicinais: ProjetoEngenharia = {
     duracao: "18 meses",
   },
   imagens: [
-    "https://us-west-2.graphassets.com/cmkc1ejod2bpe07lper075xkw/output=format:jpg/cmkz6quqcpbso07lo8u4wwqca",
-    "https://us-west-2.graphassets.com/cmkc1ejod2bpe07lper075xkw/output=format:jpg/cmkz6qun8pjip08lo843feywl",
-    "https://us-west-2.graphassets.com/cmkc1ejod2bpe07lper075xkw/output=format:jpg/cmkz6qutnpjiw08lol8jcrxbm",
-    "https://us-west-2.graphassets.com/cmkc1ejod2bpe07lper075xkw/output=format:jpg/cmkz6quw0pjj308lo6d559ajl",
-    "https://us-west-2.graphassets.com/cmkc1ejod2bpe07lper075xkw/output=format:jpg/cmkz6quyhpjja08lovpjgk9od",
-    "https://us-west-2.graphassets.com/cmkc1ejod2bpe07lper075xkw/output=format:jpg/cmkz6qv18pbsv07logy9xuzlu",
-    "https://us-west-2.graphassets.com/cmkc1ejod2bpe07lper075xkw/output=format:jpg/cmkz6qv46pbt207lohq2nsgn2",
-    "https://us-west-2.graphassets.com/cmkc1ejod2bpe07lper075xkw/output=format:jpg/cmkz6qv77pjjh08loy4nfxppz",
-    "https://us-west-2.graphassets.com/cmkc1ejod2bpe07lper075xkw/output=format:jpg/cmkz6qv9wpjjo08lonxbiilas"
+    "https://res.cloudinary.com/dotoe2mkd/image/upload/v1771788918/Metro/ghwu5zz7wyk6gt1o6sgj.jpg",
+    "https://res.cloudinary.com/dotoe2mkd/image/upload/v1771788908/Metro/clbwfwqebmdq77xzv3q9.jpg",
+    "https://res.cloudinary.com/dotoe2mkd/image/upload/v1771788925/Metro/nsoqrw76f6jx82q7bqez.jpg",
+    "https://res.cloudinary.com/dotoe2mkd/image/upload/v1771788911/Metro/auysejxypae04yum99s8.jpg",
+    "https://res.cloudinary.com/dotoe2mkd/image/upload/v1771788923/Metro/xrwdedgtpfhbqqccu8hj.jpg",
+    "https://res.cloudinary.com/dotoe2mkd/image/upload/v1771788916/Metro/nxctfjfze6nqettwx7fl.jpg",
+    "https://res.cloudinary.com/dotoe2mkd/image/upload/v1771788905/Metro/la5vjsbo5xclv0p2nesv.jpg",
+    "https://res.cloudinary.com/dotoe2mkd/image/upload/v1771788921/Metro/p4xrvt6dqlqzwy5ow6ma.jpg",
+    "https://res.cloudinary.com/dotoe2mkd/image/upload/v1771788913/Metro/vjoydipi5gtxtt19d4ry.jpg"
   ],
   especificacoes: {
     "Munícipios Atendidos": "Barrocas, Biritinga, Candeal, Cansanção, Conceição do Coité, Ixu, Itiúba, Lamarão. Monte Santo, Nordestina, Queimadas, Quijingue, Retirolândia, Santa Luz, São Domingos, Serrinha, Teofilândia, Tucano, Valente e Araci.",

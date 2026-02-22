@@ -2,7 +2,7 @@ import { ProjetoEngenharia } from "./types";
 
 export const VLTProject: ProjetoEngenharia = {
   id: "prj_vlt_03",
-  categoria: "MOBILIDADE_URBANA",
+  categoria: "Mobilidade Urbana",
   titulo: "Veiculo Leve Sobre Trilhos(VLT) - Salvador",
   descricao:
     "Sistema de mobilidade urbana voltado ao transporte público de média capacidade, integrando diferentes regiões da cidade.",
@@ -17,10 +17,10 @@ export const VLTProject: ProjetoEngenharia = {
     inicio: "14 de junho de 2024",
   },
   imagens: [
-    "https://us-west-2.graphassets.com/cmkc1ejod2bpe07lper075xkw/output=format:jpg/cmkd4cqe2rgk107muxdtsfm5i",
-    "https://us-west-2.graphassets.com/cmkc1ejod2bpe07lper075xkw/output=format:jpg/cmkd4c52krf1507mugw77desd",
-    "https://us-west-2.graphassets.com/cmkc1ejod2bpe07lper075xkw/output=format:jpg/cmkd4c507rf0y07mu8yk2apza",
-    "https://us-west-2.graphassets.com/cmkc1ejod2bpe07lper075xkw/output=format:jpg/cmkd4c4tyrf0r07muqfvjlox9",
+    "https://res.cloudinary.com/dotoe2mkd/image/upload/v1771788850/Metro/uozgimjyjk6ku3ppoqze.jpg",
+    "https://res.cloudinary.com/dotoe2mkd/image/upload/v1771788842/Metro/jenask7s1jitqqhyeloa.jpg",
+    "https://res.cloudinary.com/dotoe2mkd/image/upload/v1771788847/Metro/ogl6seiszrrdafaf2kkh.jpg",
+    "https://res.cloudinary.com/dotoe2mkd/image/upload/v1771788834/Metro/rf5hub1hl0hrs1f6cujs.jpg",
   ],
   especificacoes: {
     "Bairros Atendidos": [

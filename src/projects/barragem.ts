@@ -3,7 +3,7 @@ import { ProjetoEngenharia } from "./types";
 
 export const BarragemRioColonia: ProjetoEngenharia = {
   id: "prj_barragem_rio_colonia_08",
-  categoria: "BARRAGEM",
+  categoria: "Barragem",
   titulo: "Barragem do Rio Colônia em Itapé -BA ",
   descricao:
     "A obra foi concebida para solucionar a histórica crise de desabastecimento de água em Itabuna, causada por períodos prolongados de seca.",
@@ -19,10 +19,10 @@ export const BarragemRioColonia: ProjetoEngenharia = {
     conclusao: "2018",
   },
   imagens: [
-    "https://us-west-2.graphassets.com/cmkc1ejod2bpe07lper075xkw/output=format:jpg/cmkyplmyahrx607lon386rkc6",
-    "https://us-west-2.graphassets.com/cmkc1ejod2bpe07lper075xkw/output=format:jpg/cmkypln6chrxd07loeylqtuuo",
-    "https://us-west-2.graphassets.com/cmkc1ejod2bpe07lper075xkw/output=format:jpg/cmkypln30hsqv08lowbidfkru",
-    "https://us-west-2.graphassets.com/cmkc1ejod2bpe07lper075xkw/output=format:jpg/cmkypln98hrxk07lomc8kdpjg",
+    "https://res.cloudinary.com/dotoe2mkd/image/upload/v1771786649/Metro/ou9wfaojwaslrpmuxkav.jpg",
+    "https://res.cloudinary.com/dotoe2mkd/image/upload/v1771786639/Metro/h5eqxd4bu2pe1vssfbqk.jpg",
+    "https://res.cloudinary.com/dotoe2mkd/image/upload/v1771786697/Metro/tbmnfdyldqp7htdkivnw.jpg",
+    "https://res.cloudinary.com/dotoe2mkd/image/upload/v1771786676/Metro/b6cgazrt8ahqsdamijux.jpg",
   ],
   especificacoes: {
     "Capacidade de Armazenamento":
